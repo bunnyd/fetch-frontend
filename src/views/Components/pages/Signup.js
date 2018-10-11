@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 
 class Signup extends Component {
   constructor(props) {
@@ -8,6 +6,7 @@ class Signup extends Component {
     this.state = {};
   }
   render() {
+    console.log("what in the world");
     return <div>Signup</div>;
   }
 }

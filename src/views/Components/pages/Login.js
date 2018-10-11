@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 
 class Login extends Component {
   constructor(props) {
@@ -8,6 +6,7 @@ class Login extends Component {
     this.state = {};
   }
   render() {
+    console.log("login");
     return <div>Login</div>;
   }
 }
