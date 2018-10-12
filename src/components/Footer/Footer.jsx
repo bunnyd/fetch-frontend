@@ -32,7 +32,7 @@ function Footer({ ...props }) {
                 className={classes.block}
                 target="_blank"
               >
-                Creative Tim
+                GitHub
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
