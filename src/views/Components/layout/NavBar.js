@@ -26,6 +26,10 @@ import image from "assets/img/bg.jpg";
 import profileImage from "assets/img/faces/avatar.jpg";
 
 class NavBar extends React.Component {
+  handleLogOut = () => {
+    localStorage.clear();
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -74,7 +78,13 @@ class NavBar extends React.Component {
                     className: classes.navLink,
                     color: "transparent"
                   }}
-                  dropdownList={["Account", { divider: true }, "Logout"]}
+                  dropdownList={[
+                    "Account",
+                    { divider: true },
+                    <Link to="/logout" onClick={this.handleLogOut}>
+                      Logout
+                    </Link>
+                  ]}
                 />
               </ListItem>
             ) : (

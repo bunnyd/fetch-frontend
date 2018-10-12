@@ -23,7 +23,7 @@ import CardFooter from "components/Card/CardFooter.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 
 import { connect } from "react-redux";
-import { fetchPosts } from "../../../actions/entertainmentPostActions";
+// import { userActions } from "../../../actions/loginActions";
 
 import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
 
@@ -34,9 +34,45 @@ class Login extends React.Component {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
-      cardAnimaton: "cardHidden"
+      cardAnimaton: "cardHidden",
+      loggedIn: false
     };
   }
+
+  validateUser = event => {
+    event.preventDefault();
+    let email = event.target.email.value;
+    let password = event.target.password.value;
+
+    console.log(email);
+    console.log(password);
+    fetch("http://localhost:3000/login", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        owner: {
+          email: email,
+          password: password
+        }
+      })
+    })
+      .then(res => res.json())
+      .then(
+        res =>
+          res.jwt
+            ? (localStorage.setItem("jwt", res.jwt),
+              this.setState({ loggedIn: true }))
+            : console.log(res)
+      )
+      .then(
+        _ => (this.state.loggedIn ? this.props.history.push("/profile") : null)
+      );
+  };
+
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
     setTimeout(
@@ -47,6 +83,7 @@ class Login extends React.Component {
     );
   }
   render() {
+    console.log(this.state);
     const { classes, ...rest } = this.props;
     return (
       <div>
@@ -62,13 +99,13 @@ class Login extends React.Component {
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={4}>
                 <Card className={classes[this.state.cardAnimaton]}>
-                  <form className={classes.form}>
+                  <form className={classes.form} onSubmit={this.validateUser}>
                     <CardHeader color="primary" className={classes.cardHeader}>
                       <h4>Login</h4>
                     </CardHeader>
                     <CardBody>
                       <CustomInput
-                        labelText="Email..."
+                        labelText="Email"
                         id="email"
                         formControlProps={{
                           fullWidth: true
@@ -84,7 +121,7 @@ class Login extends React.Component {
                       />
                       <CustomInput
                         labelText="Password"
-                        id="pass"
+                        id="password"
                         formControlProps={{
                           fullWidth: true
                         }}
@@ -99,7 +136,7 @@ class Login extends React.Component {
                       />
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button simple color="primary" size="lg">
+                      <Button type="submit" simple color="primary" size="lg">
                         Submit
                       </Button>
                     </CardFooter>
@@ -119,18 +156,15 @@ class Login extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    posts: state.posts,
-    arePostsLoaded: state.postsLoaded
-  };
-}
+// function mapStateToProps(state) {
+//   const { loggingIn } = state.authentication;
+//   return {
+//     loggingIn
+//   };
+// }
+//
+// const mapDispatchToProps = {
+//   fetchPosts: fetchPosts
+// };
 
-const mapDispatchToProps = {
-  fetchPosts: fetchPosts
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(loginPageStyle)(Login));
+export default withStyles(loginPageStyle)(Login);
