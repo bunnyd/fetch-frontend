@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -35,22 +36,20 @@ class NavBar extends React.Component {
           <List className={classes.list}>
             <ListItem className={classes.listItem}>
               <Button
-                href="/adoptadog"
                 className={classes.navLink}
                 onClick={e => e.preventDefault()}
                 color="transparent"
               >
-                Adopt a dog
+                <Link to="/adoptadog">Adopt a dog</Link>
               </Button>
             </ListItem>
             <ListItem className={classes.listItem}>
               <Button
-                href="/dogsareawesome"
                 className={classes.navLink}
                 onClick={e => e.preventDefault()}
                 color="transparent"
               >
-                Mood Booster
+                <Link to="/dogs-are-awesome">Mood Booster</Link>
               </Button>
             </ListItem>
             {localStorage.getItem("jwt") ? (
@@ -61,7 +60,7 @@ class NavBar extends React.Component {
                   onClick={e => e.preventDefault()}
                   color="transparent"
                 >
-                  Join a Meetup
+                  <Link to="/meetups">Join a Meetup</Link>
                 </Button>
               </ListItem>
             ) : null}
@@ -86,7 +85,7 @@ class NavBar extends React.Component {
                   onClick={e => e.preventDefault()}
                   color="transparent"
                 >
-                  Login
+                  <Link to="/login">Login</Link>
                 </Button>
               </ListItem>
             )}
