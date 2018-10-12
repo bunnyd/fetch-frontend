@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -98,7 +100,12 @@ class Login extends React.Component {
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
                       <Button simple color="primary" size="lg">
-                        Get started
+                        Submit
+                      </Button>
+                    </CardFooter>
+                    <CardFooter className={classes.cardFooter}>
+                      <Button simple color="primary" size="sm">
+                        Sign Up Here
                       </Button>
                     </CardFooter>
                   </form>
