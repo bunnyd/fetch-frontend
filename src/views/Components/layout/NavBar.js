@@ -34,26 +34,27 @@ class NavBar extends React.Component {
     const { classes } = this.props;
     return (
       <Header
+        href="/"
         brand="BarkBuddy"
         color="info"
         rightLinks={
           <List className={classes.list}>
             <ListItem className={classes.listItem}>
               <Button
+                href="/adoptadog"
                 className={classes.navLink}
-                onClick={e => e.preventDefault()}
                 color="transparent"
               >
-                <Link to="/adoptadog">Adopt a dog</Link>
+                Adopt a dog
               </Button>
             </ListItem>
             <ListItem className={classes.listItem}>
               <Button
+                href="/dogs-are-awesome"
                 className={classes.navLink}
-                onClick={e => e.preventDefault()}
                 color="transparent"
               >
-                <Link to="/dogs-are-awesome">Mood Booster</Link>
+                Mood Booster
               </Button>
             </ListItem>
             {localStorage.getItem("jwt") ? (
@@ -61,10 +62,9 @@ class NavBar extends React.Component {
                 <Button
                   href="/meetups"
                   className={classes.navLink}
-                  onClick={e => e.preventDefault()}
                   color="transparent"
                 >
-                  <Link to="/meetups">Join a Meetup</Link>
+                  Join a Meetup
                 </Button>
               </ListItem>
             ) : null}
@@ -79,7 +79,7 @@ class NavBar extends React.Component {
                     color: "transparent"
                   }}
                   dropdownList={[
-                    "Account",
+                    <Link to="/profile">Account</Link>,
                     { divider: true },
                     <Link to="/logout" onClick={this.handleLogOut}>
                       Logout
@@ -92,10 +92,9 @@ class NavBar extends React.Component {
                 <Button
                   href="/login"
                   className={classes.navLink}
-                  onClick={e => e.preventDefault()}
                   color="transparent"
                 >
-                  <Link to="/login">Login</Link>
+                  Login
                 </Button>
               </ListItem>
             )}
