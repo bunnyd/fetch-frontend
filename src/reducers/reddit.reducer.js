@@ -1,11 +1,13 @@
+import { GET_REDDIT_POSTS } from "../actions/types";
+
 const defaultState = {
   posts: [],
   postsLoaded: false
 };
 
-export default function rootReducer(state = defaultState, action) {
+export default function(state = defaultState, action) {
   switch (action.type) {
-    case "GET_REDDIT_POSTS":
+    case GET_REDDIT_POSTS:
       return {
         ...state,
         posts: action.payload,
