@@ -4,7 +4,7 @@ const popoverStyles = {
     boxShadow:
       "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
     lineHeight: "1.5em",
-    background: "#fff",
+    background: "rgba(85,85,85,0.9)",
     border: "none",
     borderRadius: "3px",
     display: "block",
@@ -28,20 +28,22 @@ const popoverStyles = {
     marginTop: "5px"
   },
   popoverHeader: {
-    backgroundColor: "#fff",
     border: "none",
     padding: "15px 15px 5px",
     fontSize: "1.125rem",
     margin: "0",
-    color: "#555",
+    color: "#FFFFFF",
     borderTopLeftRadius: "calc(0.3rem - 1px)",
     borderTopRightRadius: "calc(0.3rem - 1px)"
   },
   popoverBody: {
     padding: "10px 15px 15px",
     lineHeight: "1.4",
-    color: "#555"
+    color: "#FFFFFF"
   }
 };
 
 export default popoverStyles;
+
+// WEBPACK FOOTER //
+// ./src/assets/jss/material-kit-pro-react/popoverStyles.jsx

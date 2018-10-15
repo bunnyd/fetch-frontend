@@ -1,14 +1,30 @@
-import { container, title } from "assets/jss/material-kit-react.jsx";
+import {
+  container,
+  title,
+  cardTitle,
+  description,
+  mlAuto,
+  mrAuto
+} from "assets/jss/material-kit-react.jsx";
 
 import modalStyle from "assets/jss/material-kit-react/modalStyle.jsx";
 import tooltipsStyle from "assets/jss/material-kit-react/tooltipsStyle.jsx";
 import popoverStyles from "assets/jss/material-kit-react/popoverStyles.jsx";
+import customCheckboxRadioSwitch from "assets/jss/material-kit-react/customCheckboxRadioSwitchStyle.jsx";
 
-const javascriptStyles = {
+const javascriptStyles = theme => ({
+  container,
+  description,
+  cardTitle,
+  mlAuto,
+  mrAuto,
+  ...tooltipsStyle,
+  ...popoverStyles,
+  ...modalStyle(theme),
+  ...customCheckboxRadioSwitch,
   section: {
     padding: "70px 0 0"
   },
-  container,
   title: {
     ...title,
     marginTop: "30px",
@@ -16,11 +32,10 @@ const javascriptStyles = {
     textDecoration: "none"
   },
   icon: {
-    width: "17px",
-    height: "17px",
-    marginRight: "4px"
+    width: "24px",
+    height: "24px",
+    color: "#495057"
   },
-  ...modalStyle,
   label: {
     color: "rgba(0, 0, 0, 0.26)",
     cursor: "pointer",
@@ -31,8 +46,48 @@ const javascriptStyles = {
     fontWeight: "400",
     paddingLeft: "0"
   },
-  ...tooltipsStyle,
-  ...popoverStyles
-};
+  textCenter: {
+    textAlign: "center"
+  },
+  cardTitleWhite: {
+    ...cardTitle,
+    color: "#FFFFFF !important"
+  },
+  socialLine: {
+    marginTop: "1rem",
+    textAlign: "center",
+    padding: "0"
+  },
+  socialLineButton: {
+    "&, &:hover": { color: "#fff" },
+    marginLeft: "5px",
+    marginRight: "5px"
+  },
+  cardLoginHeader: {
+    marginTop: "-40px",
+    padding: "20px 0",
+    width: "100%",
+    marginBottom: "15px"
+  },
+  cardLoginBody: {
+    paddingTop: "0",
+    paddingBottom: "0"
+  },
+  justifyContentCenter: {
+    WebkitBoxPack: "center !important",
+    MsFlexPack: "center !important",
+    justifyContent: "center !important"
+  },
+  infoArea: {
+    padding: "0px 0px 20px !important"
+  },
+  space50: {
+    height: "50px",
+    display: "block"
+  }
+});
 
 export default javascriptStyles;
+
+// WEBPACK FOOTER //
+// ./src/assets/jss/material-kit-pro-react/views/componentsSections/javascriptStyles.jsx

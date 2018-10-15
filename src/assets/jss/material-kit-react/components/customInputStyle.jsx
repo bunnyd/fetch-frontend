@@ -8,34 +8,26 @@ import {
 const customInputStyle = {
   disabled: {
     "&:before": {
-      borderColor: "transparent !important"
+      backgroundColor: "transparent !important"
     }
   },
   underline: {
     "&:hover:not($disabled):before,&:before": {
-      borderColor: "#D2D2D2 !important",
-      borderWidth: "1px !important"
+      borderBottomColor: "#D2D2D2 !important",
+      borderBottomWidth: "1px !important"
     },
     "&:after": {
-      borderColor: primaryColor
+      borderBottomColor: primaryColor
     }
   },
   underlineError: {
     "&:after": {
-      borderColor: dangerColor
+      borderBottomColor: dangerColor
     }
   },
   underlineSuccess: {
     "&:after": {
-      borderColor: successColor
-    }
-  },
-  whiteUnderline: {
-    "&:hover:not($disabled):before,&:before": {
-      borderColor: "#FFFFFF"
-    },
-    "&:after": {
-      borderColor: "#FFFFFF"
+      borderBottomColor: successColor
     }
   },
   labelRoot: {
@@ -55,12 +47,31 @@ const customInputStyle = {
   labelRootSuccess: {
     color: successColor + " !important"
   },
+  feedback: {
+    position: "absolute",
+    bottom: "4px",
+    right: "0",
+    zIndex: "2",
+    display: "block",
+    width: "24px",
+    height: "24px",
+    textAlign: "center",
+    pointerEvents: "none"
+  },
   formControl: {
     margin: "0 0 17px 0",
     paddingTop: "27px",
     position: "relative",
     "& svg,& .fab,& .far,& .fal,& .fas,& .material-icons": {
       color: "#495057"
+    }
+  },
+  whiteUnderline: {
+    "&:hover:not($disabled):before,&:before": {
+      borderBottomColor: "#FFFFFF"
+    },
+    "&:after": {
+      borderBottomColor: "#FFFFFF"
     }
   },
   input: {
@@ -85,3 +96,6 @@ const customInputStyle = {
 };
 
 export default customInputStyle;
+
+// WEBPACK FOOTER //
+// ./src/assets/jss/material-kit-pro-react/components/customInputStyle.jsx
