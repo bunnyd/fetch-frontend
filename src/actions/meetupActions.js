@@ -39,10 +39,7 @@ export const deleteMeetup = id => async dispatch => {
 };
 
 export const addMeetup = meetup => async dispatch => {
-  const res = await axios.post(
-    "https://jsonplaceholder.typicode.com/users",
-    meetup
-  );
+  const res = await axios.post("http://localhost:3000/meetups/", meetup);
   dispatch({
     type: ADD_MEETUP,
     payload: res.data
