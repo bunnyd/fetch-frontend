@@ -1,7 +1,12 @@
+// ##############################
+// // // Button styles
+// #############################
+
 import {
   grayColor,
   roseColor,
   primaryColor,
+  secondaryColor,
   infoColor,
   successColor,
   warningColor,
@@ -44,6 +49,8 @@ const buttonStyle = {
       position: "relative",
       display: "inline-block",
       top: "0",
+      marginTop: "-1em",
+      marginBottom: "-1em",
       fontSize: "1.1rem",
       marginRight: "4px",
       verticalAlign: "middle"
@@ -59,6 +66,7 @@ const buttonStyle = {
     },
     "&$justIcon": {
       "& .fab,& .fas,& .far,& .fal,& .material-icons": {
+        marginTop: "0px",
         marginRight: "0px",
         position: "absolute",
         width: "100%",
@@ -82,6 +90,18 @@ const buttonStyle = {
       backgroundColor: primaryColor,
       boxShadow:
         "0 14px 26px -12px rgba(156, 39, 176, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(156, 39, 176, 0.2)"
+    }
+  },
+  secondary: {
+    color: "rgba(0,0,0,.87)",
+    backgroundColor: secondaryColor,
+    boxShadow:
+      "0 2px 2px 0 hsla(0,0%,98%,.14), 0 3px 1px -2px hsla(0,0%,98%,.2), 0 1px 5px 0 hsla(0,0%,98%,.12)",
+    "&:hover,&:focus": {
+      boxShdow:
+        "0 14px 26px -12px hsla(0,0%,98%,.42), 0 4px 23px 0 rgba(0,0,0,.12), 0 8px 10px -5px hsla(0,0%,98%,.2)",
+      color: "rgba(0,0,0,.87)",
+      backgroundColor: "#f2f2f2"
     }
   },
   info: {
@@ -135,7 +155,7 @@ const buttonStyle = {
     }
   },
   white: {
-    "&,&:focus,&:hover,&:visited": {
+    "&,&:focus,&:hover": {
       backgroundColor: "#FFFFFF",
       color: grayColor
     }
@@ -176,6 +196,54 @@ const buttonStyle = {
         "0 14px 26px -12px rgba(221, 75, 57, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(221, 75, 57, 0.2)"
     }
   },
+  linkedin: {
+    backgroundColor: "#0976b4",
+    color: "#fff",
+    boxShadow:
+      "0 2px 2px 0 rgba(9, 118, 180, 0.14), 0 3px 1px -2px rgba(9, 118, 180, 0.2), 0 1px 5px 0 rgba(9, 118, 180, 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: "#0976b4",
+      color: "#fff",
+      boxShadow:
+        "0 14px 26px -12px rgba(9, 118, 180, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(9, 118, 180, 0.2)"
+    }
+  },
+  pinterest: {
+    backgroundColor: "#cc2127",
+    color: "#fff",
+    boxShadow:
+      "0 2px 2px 0 rgba(204, 33, 39, 0.14), 0 3px 1px -2px rgba(204, 33, 39, 0.2), 0 1px 5px 0 rgba(204, 33, 39, 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: "#cc2127",
+      color: "#fff",
+      boxShadow:
+        "0 14px 26px -12px rgba(204, 33, 39, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(204, 33, 39, 0.2)"
+    }
+  },
+  youtube: {
+    backgroundColor: "#e52d27",
+    color: "#fff",
+    boxShadow:
+      "0 2px 2px 0 rgba(229, 45, 39, 0.14), 0 3px 1px -2px rgba(229, 45, 39, 0.2), 0 1px 5px 0 rgba(229, 45, 39, 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: "#e52d27",
+      color: "#fff",
+      boxShadow:
+        "0 14px 26px -12px rgba(229, 45, 39, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(229, 45, 39, 0.2)"
+    }
+  },
+  tumblr: {
+    backgroundColor: "#35465c",
+    color: "#fff",
+    boxShadow:
+      "0 2px 2px 0 rgba(53, 70, 92, 0.14), 0 3px 1px -2px rgba(53, 70, 92, 0.2), 0 1px 5px 0 rgba(53, 70, 92, 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: "#35465c",
+      color: "#fff",
+      boxShadow:
+        "0 14px 26px -12px rgba(53, 70, 92, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(53, 70, 92, 0.2)"
+    }
+  },
   github: {
     backgroundColor: "#333333",
     color: "#fff",
@@ -188,8 +256,56 @@ const buttonStyle = {
         "0 14px 26px -12px rgba(51, 51, 51, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(51, 51, 51, 0.2)"
     }
   },
+  behance: {
+    backgroundColor: "#1769ff",
+    color: "#fff",
+    boxShadow:
+      "0 2px 2px 0 rgba(23, 105, 255, 0.14), 0 3px 1px -2px rgba(23, 105, 255, 0.2), 0 1px 5px 0 rgba(23, 105, 255, 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: "#1769ff",
+      color: "#fff",
+      boxShadow:
+        "0 14px 26px -12px rgba(23, 105, 255, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(23, 105, 255, 0.2)"
+    }
+  },
+  dribbble: {
+    backgroundColor: "#ea4c89",
+    color: "#fff",
+    boxShadow:
+      "0 2px 2px 0 rgba(234, 76, 137, 0.14), 0 3px 1px -2px rgba(234, 76, 137, 0.2), 0 1px 5px 0 rgba(234, 76, 137, 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: "#ea4c89",
+      color: "#fff",
+      boxShadow:
+        "0 14px 26px -12px rgba(234, 76, 137, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(234, 76, 137, 0.2)"
+    }
+  },
+  reddit: {
+    backgroundColor: "#ff4500",
+    color: " #fff",
+    boxShadow:
+      "0 2px 2px 0 rgba(255, 69, 0, 0.14), 0 3px 1px -2px rgba(255, 69, 0, 0.2), 0 1px 5px 0 rgba(255, 69, 0, 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: "#ff4500",
+      color: " #fff",
+      boxShadow:
+        "0 14px 26px -12px rgba(255, 69, 0, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(255, 69, 0, 0.2)"
+    }
+  },
+  instagram: {
+    backgroundColor: "#125688",
+    color: " #fff",
+    boxShadow:
+      "0 2px 2px 0 rgba(18, 86, 136, 0.14), 0 3px 1px -2px rgba(18, 86, 136, 0.2), 0 1px 5px 0 rgba(18, 86, 136, 0.12)",
+    "&:hover,&:focus": {
+      backgroundColor: "#145f96",
+      color: " #fff",
+      boxShadow:
+        "0 14px 26px -12px rgba(18, 86, 136, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(18, 86, 136, 0.2)"
+    }
+  },
   simple: {
-    "&,&:focus,&:hover,&:visited": {
+    "&,&:focus,&:hover": {
       color: "#FFFFFF",
       background: "transparent",
       boxShadow: "none"
@@ -239,14 +355,54 @@ const buttonStyle = {
         color: "#dd4b39"
       }
     },
+    "&$linkedin": {
+      "&,&:focus,&:hover,&:visited": {
+        color: "#0976b4"
+      }
+    },
+    "&$pinterest": {
+      "&,&:focus,&:hover,&:visited": {
+        color: "#cc2127"
+      }
+    },
+    "&$youtube": {
+      "&,&:focus,&:hover,&:visited": {
+        color: "#e52d27"
+      }
+    },
+    "&$tumblr": {
+      "&,&:focus,&:hover,&:visited": {
+        color: "#35465c"
+      }
+    },
     "&$github": {
       "&,&:focus,&:hover,&:visited": {
         color: "#333333"
       }
+    },
+    "&$behance": {
+      "&,&:focus,&:hover,&:visited": {
+        color: "#1769ff"
+      }
+    },
+    "&$dribbble": {
+      "&,&:focus,&:hover,&:visited": {
+        color: "#ea4c89"
+      }
+    },
+    "&$reddit": {
+      "&,&:focus,&:hover,&:visited": {
+        color: "#ff4500"
+      }
+    },
+    "&$instagram": {
+      "&,&:focus,&:hover,&:visited": {
+        color: "#125688"
+      }
     }
   },
   transparent: {
-    "&,&:focus,&:hover,&:visited": {
+    "&,&:focus,&:hover": {
       color: "inherit",
       background: "transparent",
       boxShadow: "none"
@@ -318,7 +474,13 @@ const buttonStyle = {
         height: "17px"
       }
     }
+  },
+  fileButton: {
+    // display: "inline-block"
   }
 };
 
 export default buttonStyle;
+
+// WEBPACK FOOTER //
+// ./src/assets/jss/material-kit-pro-react/components/buttonStyle.jsx

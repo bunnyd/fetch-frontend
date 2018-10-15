@@ -6,7 +6,9 @@ class User extends Component {
     this.state = {};
   }
   render() {
-    return <div>User</div>;
+    return (
+      <div>User - have something in here to allow users to edit profile.</div>
+    );
   }
 }
 

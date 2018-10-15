@@ -79,7 +79,7 @@ class NavBar extends React.Component {
                     color: "transparent"
                   }}
                   dropdownList={[
-                    <Link to="/profile">Account</Link>,
+                    <Link to="/profile">My Profile</Link>,
                     { divider: true },
                     <Link to="/logout" onClick={this.handleLogOut}>
                       Logout

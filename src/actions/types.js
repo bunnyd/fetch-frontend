@@ -1,4 +1,6 @@
 export const GET_REDDIT_POSTS = "GET_REDDIT_POSTS";
+export const GET_YELP_DOG_PARKS = "GET_YELP_DOG_PARKS";
+export const GET_YELP_DOG_RESTAURANTS = "GET_YELP_DOG_RESTAURANTS";
 
 export const userConstants = {
   LOGIN_REQUEST: "USERS_LOGIN_REQUEST",
@@ -17,3 +19,9 @@ export const alertConstants = {
   ERROR: "ALERT_ERROR",
   CLEAR: "ALERT_CLEAR"
 };
+
+export const GET_MEETUPS = "GET_MEETUPS";
+export const DELETE_MEETUP = "DELETE_MEETUPS";
+export const ADD_MEETUP = "ADD_MEETUP";
+export const GET_MEETUP = "GET_MEETUP";
+export const UPDATE_MEETUP = "UPDATE_MEETUP";

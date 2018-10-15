@@ -14,7 +14,7 @@ var loggedInRoutes = [
   { path: "/login", name: "LoginPage", component: Login },
   { path: "/logout", name: "LogoutPage", component: Logout },
   { path: "/profile", name: "ProfilePage", component: User },
-  { path: "/edit-profile", name: "EditProfilePage", component: EditUser },
+  { path: "/edit-account", name: "EditAccountPage", component: EditUser },
   { path: "/meetups", name: "MeetupsPage", component: Meetups },
   { path: "/add-meetup", name: "AddMeetupPage", component: AddMeetup }
 ];

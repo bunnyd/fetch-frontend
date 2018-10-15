@@ -2,9 +2,9 @@ const tooltipsStyle = {
   tooltip: {
     padding: "10px 15px",
     minWidth: "130px",
-    color: "#555555",
+    color: "#FFFFFF",
     lineHeight: "1.7em",
-    background: "#FFFFFF",
+    background: "rgba(85,85,85,0.9)",
     border: "none",
     borderRadius: "3px",
     boxShadow:
@@ -27,3 +27,6 @@ const tooltipsStyle = {
 };
 
 export default tooltipsStyle;
+
+// WEBPACK FOOTER //
+// ./src/assets/jss/material-kit-pro-react/tooltipsStyle.jsx

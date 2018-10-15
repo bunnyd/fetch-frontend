@@ -34,3 +34,6 @@ GridContainer.propTypes = {
 };
 
 export default withStyles(style)(GridContainer);
+
+// WEBPACK FOOTER //
+// ./src/components/Grid/GridContainer.jsx
