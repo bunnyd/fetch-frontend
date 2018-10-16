@@ -27,3 +27,6 @@ Clearfix.propTypes = {
 };
 
 export default withStyles(style)(Clearfix);
+
+// WEBPACK FOOTER //
+// ./src/components/Clearfix/Clearfix.jsx

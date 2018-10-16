@@ -1,26 +1,38 @@
-import config from "config";
-import { authHeader } from "../_helpers";
-
 export const userService = {
   login,
-  logout,
-  getAll
+  logout
 };
 
 function login(email, password) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
+    body: JSON.stringify({
+      owner: {
+        email: email,
+        password: password
+      }
+    })
   };
 
-  return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
+  return fetch("http://localhost:3000/login", requestOptions)
     .then(handleResponse)
     .then(user => {
       // login successful if there's a jwt token in the response
-      if (user.token) {
+      if (user.jwt) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem("user", JSON.stringify(user));
+        // localStorage.setItem("user-id", JSON.stringify(user.owner.id));
+
+        localStorage.setItem("jwt", user.jwt);
+        // localStorage.setItem(
+        //   "user-fname",
+        //   JSON.stringify(user.owner.first_name)
+        // );
+        // localStorage.setItem(
+        //   "user-lname",
+        //   JSON.stringify(user.owner.last_name)
+        // );
+        // localStorage.setItem("user-zip", JSON.stringify(user.owner.zip_code));
       }
 
       return user;
@@ -29,17 +41,24 @@ function login(email, password) {
 
 function logout() {
   // remove user from local storage to log user out
-  localStorage.removeItem("user");
+  localStorage.removeItem("jwt");
+
+  // localStorage.removeItem("user-id");
+  // localStorage.removeItem("user-fname");
+  // localStorage.removeItem("user-lname");
+  // localStorage.removeItem("user-zip");
 }
 
-function getAll() {
-  const requestOptions = {
-    method: "GET",
-    headers: authHeader()
-  };
-
-  return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
-}
+// function getById(id) {
+//   const requestOptions = {
+//     method: "GET",
+//     headers: authHeader()
+//   };
+//
+//   return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(
+//     handleResponse
+//   );
+// }
 
 function handleResponse(response) {
   return response.text().then(text => {
@@ -48,7 +67,6 @@ function handleResponse(response) {
       if (response.status === 401) {
         // auto logout if 401 response returned from api
         logout();
-        // location.reload(true);
       }
 
       const error = (data && data.message) || response.statusText;

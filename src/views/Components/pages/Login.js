@@ -9,6 +9,9 @@ import Icon from "@material-ui/core/Icon";
 import Email from "@material-ui/icons/Email";
 import Password from "@material-ui/icons/Lock";
 import People from "@material-ui/icons/People";
+import Warning from "@material-ui/icons/Warning";
+import Check from "@material-ui/icons/Check";
+
 // core components
 import Header from "components/Header/Header.jsx";
 import HeaderLinks from "components/Header/HeaderLinks.jsx";
@@ -21,9 +24,13 @@ import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
+//alert
+import SnackbarContent from "components/Snackbar/SnackbarContent.jsx";
+import Clearfix from "components/Clearfix/Clearfix.jsx";
+import notificationsStyles from "assets/jss/material-kit-react/views/componentsSections/notificationsStyles.jsx";
 
 import { connect } from "react-redux";
-// import { userActions } from "../../../actions/loginActions";
+import { userActions } from "../../../actions/userActions";
 
 import loginPageStyle from "assets/jss/material-kit-react/views/loginPage.jsx";
 
@@ -32,46 +39,65 @@ import image from "assets/img/login-bg.jpg";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    // we use this to make the card to appear after the page has been rendered
     this.state = {
       cardAnimaton: "cardHidden",
-      loggedIn: false
+      loggedIn: false,
+      email: "",
+      password: "",
+      submitted: false
     };
   }
 
-  validateUser = event => {
-    event.preventDefault();
-    let email = event.target.email.value;
-    let password = event.target.password.value;
-
-    console.log(email);
-    console.log(password);
-    fetch("http://localhost:3000/login", {
-      method: "POST",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify({
-        owner: {
-          email: email,
-          password: password
-        }
-      })
-    })
-      .then(res => res.json())
-      .then(
-        res =>
-          res.jwt
-            ? (localStorage.setItem("jwt", res.jwt),
-              this.setState({ loggedIn: true }))
-            : console.log(res)
-      )
-      .then(
-        _ => (this.state.loggedIn ? this.props.history.push("/profile") : null)
-      );
+  handleChange = e => {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
   };
+
+  handleSubmit(e) {
+    e.preventDefault();
+
+    this.setState({ submitted: true });
+    const { email, password } = this.state;
+    const { dispatch } = this.props;
+    if (email && password) {
+      dispatch(userActions.login(email, password, this.props.history));
+    }
+  }
+
+  // validateUser = event => {
+  //   event.preventDefault();
+  //   let email = event.target.email.value;
+  //   let password = event.target.password.value;
+  //
+  //   console.log(email);
+  //   console.log(password);
+  //   fetch("http://localhost:3000/login", {
+  //     method: "POST",
+  //     credentials: "same-origin",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       owner: {
+  //         email: email,
+  //         password: password
+  //       }
+  //     })
+  //   })
+  //     .then(res => res.json())
+  //     .then(
+  //       res =>
+  //         res.jwt
+  //           ? (localStorage.setItem("jwt", res.jwt),
+  //             this.setState({ loggedIn: true }))
+  //           : console.log(res)
+  //     )
+  //     .then(
+  //       _ => (this.state.loggedIn ? this.props.history.push("/profile") : null)
+  //     );
+  // };
 
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
@@ -83,7 +109,11 @@ class Login extends React.Component {
     );
   }
   render() {
-    console.log(this.state);
+    console.log("login - props", this.props);
+    console.log("login - state", this.state);
+
+    const { loggingIn } = this.props;
+    const { email, password, submitted } = this.state;
     const { classes, ...rest } = this.props;
     return (
       <div>
@@ -99,7 +129,10 @@ class Login extends React.Component {
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={4}>
                 <Card className={classes[this.state.cardAnimaton]}>
-                  <form className={classes.form} onSubmit={this.validateUser}>
+                  <form
+                    className={classes.form}
+                    onSubmit={e => this.handleSubmit(e)}
+                  >
                     <CardHeader color="primary" className={classes.cardHeader}>
                       <h4>Login</h4>
                     </CardHeader>
@@ -116,7 +149,8 @@ class Login extends React.Component {
                             <InputAdornment position="end">
                               <Email className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
+                          onChange: this.handleChange
                         }}
                       />
                       <CustomInput
@@ -131,7 +165,8 @@ class Login extends React.Component {
                             <InputAdornment position="end">
                               <Password className={classes.inputIconsColor} />
                             </InputAdornment>
-                          )
+                          ),
+                          onChange: this.handleChange
                         }}
                       />
                     </CardBody>
@@ -156,15 +191,11 @@ class Login extends React.Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   const { loggingIn } = state.authentication;
-//   return {
-//     loggingIn
-//   };
-// }
-//
-// const mapDispatchToProps = {
-//   fetchPosts: fetchPosts
-// };
+function mapStateToProps(state) {
+  const { loggingIn } = state.authentication;
+  return {
+    loggingIn
+  };
+}
 
-export default withStyles(loginPageStyle)(Login);
+export default connect(mapStateToProps)(withStyles(loginPageStyle)(Login));

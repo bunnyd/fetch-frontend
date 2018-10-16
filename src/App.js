@@ -1,61 +1,71 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-//layout
-import Header from "./components/layout/Header";
-//meetups
-import AddMeetup from "./components/meetups/AddMeetup";
-import Meetups from "./components/meetups/Meetups";
-
-//users
-import EditUser from "./components/users/EditUser";
-import User from "./components/users/User";
-
-//pages
-import Home from "./components/pages/Home";
-import Entertainment from "./components/pages/Entertainment";
-import Login from "./components/pages/Login";
-import Signup from "./components/pages/Signup";
-import Logout from "./components/pages/Logout";
-import NotFound from "./components/pages/NotFound";
+import NavBar from "views/Components/layout/NavBar";
+import indexRoutes from "routes/indexRoutes.jsx";
+import loggedInRoutes from "routes/loggedInRoutes.jsx";
 
 //redux
+//redux
 import { Provider } from "react-redux";
-import store from "./store";
+import { createStore, applyMiddleware } from "redux";
+import store from "./store/store";
+import { userConstants } from "./actions/types";
 
 //bootstrap
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
 class App extends Component {
+  componentDidMount() {
+    console.log("jwt", localStorage.jwt);
+
+    if (localStorage.jwt !== undefined) {
+      fetch("http://localhost:3000/authenticate", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        }
+      })
+        .then(data => data.json())
+        .then(user => {
+          console.log(user);
+          store.dispatch({ type: userConstants.SET_USER, payload: user.owner });
+        });
+    }
+  }
+
   render() {
     return (
       <Provider store={store}>
         <Router>
-          <div className="App">
-            <Header />
-            <div className="container">
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/dogsareawesome" component={Entertainment} />
-                <Route exact path="/signup" component={Signup} />
-                <Route exact path="/logout" component={Logout} />
+          <React.Fragment>
+            <NavBar />
+            {indexRoutes.map((prop, key) => {
+              return (
                 <Route
                   exact
-                  path="/login"
-                  component={Login}
-                  // loggedInUser={this.state.loggedInUser}
+                  path={prop.path}
+                  key={key}
+                  component={prop.component}
                 />
+              );
+            })}
+            {loggedInRoutes.map((prop, key) => {
+              return (
                 <Route
                   exact
-                  path="/profile"
-                  // loggedInUser={this.state.loggedInUser}
-                  component={User}
+                  path={prop.path}
+                  key={key}
+                  component={prop.component}
+                  //loggedInUser={this.state.loggedInUser}
                 />
-                <Route component={NotFound} />
-              </Switch>
-            </div>
-          </div>
+              );
+            })}
+          </React.Fragment>
         </Router>
       </Provider>
     );

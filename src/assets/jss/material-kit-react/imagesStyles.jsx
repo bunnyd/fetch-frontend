@@ -42,3 +42,6 @@ const imagesStyles = {
 };
 
 export default imagesStyles;
+
+// WEBPACK FOOTER //
+// ./src/assets/jss/material-kit-pro-react/imagesStyles.jsx

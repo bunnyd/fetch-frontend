@@ -132,11 +132,40 @@ class Meetups extends React.Component {
     this.props.getMeetups();
   }
 
-  handleAttendEvent = (e, row) => {
+  handleAttendEvent = e => {
     e.preventDefault();
     console.log(
       `I'm coming to ${this.state.joinId} ${this.state.joinLocationName}`
     );
+    // debugger;
+    // console.log(`${localStorage.getItem("user-id")}`);
+    this.props.meetups.forEach(meetup => {
+      if (this.state.joinLocationName === meetup.location_name) {
+        // debugger;
+        fetch(
+          `http://localhost:3000/owners/${localStorage.getItem("user-id")}`,
+          {
+            method: "PATCH",
+            credentials: "same-origin",
+            headers: {
+              Authorization: `${localStorage.getItem("jwt")}`,
+              "Content-Type": "application/json",
+              Accept: "application/json"
+            },
+            body: JSON.stringify({
+              meetup_ids: [
+                {
+                  id: `${this.state.joinId}`
+                }
+              ]
+            })
+          }
+        ) //end fetch
+          .then(res => res.json())
+          .then(e => console.log("blah", e));
+        // .then(console.log)
+      } //end if
+    }); //end forEach
   };
 
   handleCreateMeetup = e => {
@@ -203,7 +232,7 @@ class Meetups extends React.Component {
 
   render() {
     // debugger;
-    console.log("meetup page", this.props);
+    console.log("meetup page - props", this.props);
     console.log("meetup", this.state);
 
     const { classes } = this.props;
@@ -315,6 +344,7 @@ class Meetups extends React.Component {
                           }
                         >
                           <Button
+                            default
                             onClick={() => this.handleClose("smallModal")}
                             link
                             className={classes.modalSmallFooterFirstButton}
@@ -328,7 +358,7 @@ class Meetups extends React.Component {
                             }}
                             color="success"
                             key={row.id}
-                            simple
+                            default
                             className={
                               classes.modalSmallFooterFirstButton +
                               " " +
@@ -545,7 +575,8 @@ function mapStateToProps(state) {
     yelpDogParksLoaded: state.yelp.yelpDogParksLoaded,
     dogRestaurants: state.yelp.dogRestaurants,
     yelpDogRestaurantsLoaded: state.yelp.yelpDogRestaurantsLoaded,
-    meetups: state.meetup.meetups
+    meetups: state.meetup.meetups,
+    user: state.authentication.user
   };
 }
 

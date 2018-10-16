@@ -1,14 +1,23 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
   render() {
-    console.log("Home");
+    console.log(this.props);
     return <div>Home</div>;
   }
 }
 
-export default Home;
+function mapStateToProps(state) {
+  console.log("Home state -", state);
+  return {
+    user: state.authentication.user
+  };
+}
+
+export default connect(mapStateToProps)(Home);

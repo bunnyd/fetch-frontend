@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
+// core components
 
 import snackbarContentStyle from "assets/jss/material-kit-react/components/snackbarContentStyle.jsx";
 
@@ -30,7 +31,6 @@ class SnackbarContent extends React.Component {
         </IconButton>
       ];
     }
-
     let snackIcon = null;
     switch (typeof icon) {
       case "function":
@@ -43,7 +43,6 @@ class SnackbarContent extends React.Component {
         snackIcon = null;
         break;
     }
-
     this.state = {
       alert: (
         <Snack
@@ -79,3 +78,6 @@ SnackbarContent.propTypes = {
 };
 
 export default withStyles(snackbarContentStyle)(SnackbarContent);
+
+// WEBPACK FOOTER //
+// ./src/components/Snackbar/SnackbarContent.jsx

@@ -1,4 +1,4 @@
-import { container, title } from "assets/jss/material-kit-react.jsx";
+import { container, title, section } from "assets/jss/material-kit-react.jsx";
 
 const notificationsStyles = {
   section: {
@@ -6,7 +6,8 @@ const notificationsStyles = {
     display: "block",
     width: "100%",
     position: "relative",
-    padding: "0"
+    padding: "70px 0",
+    ...section
   },
   title: {
     ...title,
@@ -14,7 +15,14 @@ const notificationsStyles = {
     minHeight: "32px",
     textDecoration: "none"
   },
+  space70: {
+    height: "70px",
+    display: "block"
+  },
   container
 };
 
 export default notificationsStyles;
+
+// WEBPACK FOOTER //
+// ./src/assets/jss/material-kit-pro-react/views/componentsSections/notificationsStyles.jsx

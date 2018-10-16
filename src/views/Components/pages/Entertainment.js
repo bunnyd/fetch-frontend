@@ -50,7 +50,7 @@ class Entertainment extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     const { classes, ...rest } = this.props;
 
     if (!this.props.arePostsLoaded) {

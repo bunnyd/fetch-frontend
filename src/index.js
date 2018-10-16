@@ -17,37 +17,8 @@ import "assets/scss/material-kit-react.css?v=1.3.0";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import store from "./store/store";
+import App from "./App";
 
 // <Route path="*" component={NotFound} />
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <React.Fragment>
-        <NavBar />
-        {indexRoutes.map((prop, key) => {
-          return (
-            <Route
-              exact
-              path={prop.path}
-              key={key}
-              component={prop.component}
-            />
-          );
-        })}
-        {loggedInRoutes.map((prop, key) => {
-          return (
-            <Route
-              exact
-              path={prop.path}
-              key={key}
-              component={prop.component}
-              //loggedInUser={this.state.loggedInUser}
-            />
-          );
-        })}
-      </React.Fragment>
-    </Router>
-  </Provider>,
-  document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));
