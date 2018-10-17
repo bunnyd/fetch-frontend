@@ -75,7 +75,7 @@ const navPillsStyle = theme => ({
   },
   contentWrapper: {
     marginTop: "20px",
-    width: "1500px"
+    width: "1200px"
   },
   contentWrapperProfile: {
     marginTop: "20px"
