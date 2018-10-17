@@ -80,6 +80,23 @@ class NavPills extends React.Component {
         })}
       </Tabs>
     );
+    const tabContentProfile = (
+      <div className={classes.contentWrapperProfile}>
+        <SwipeableViews
+          axis={direction === "rtl" ? "x-reverse" : "x"}
+          index={this.state.active}
+          onChangeIndex={this.handleChangeIndex}
+        >
+          {tabs.map((prop, key) => {
+            return (
+              <div className={classes.tabContentProfile} key={key}>
+                {prop.tabContentProfile}
+              </div>
+            );
+          })}
+        </SwipeableViews>
+      </div>
+    );
     const tabContent = (
       <div className={classes.contentWrapper}>
         <SwipeableViews
@@ -101,11 +118,13 @@ class NavPills extends React.Component {
       <GridContainer>
         <GridItem {...horizontal.tabsGrid}>{tabButtons}</GridItem>
         <GridItem {...horizontal.contentGrid}>{tabContent}</GridItem>
+        <GridItem {...horizontal.contentGrid}>{tabContentProfile}</GridItem>
       </GridContainer>
     ) : (
       <div>
         {tabButtons}
         {tabContent}
+        {tabContentProfile}
       </div>
     );
   }
@@ -124,7 +143,8 @@ NavPills.propTypes = {
     PropTypes.shape({
       tabButton: PropTypes.string,
       tabIcon: PropTypes.func,
-      tabContent: PropTypes.node
+      tabContent: PropTypes.node,
+      tabContentProfile: PropTypes.node
     })
   ).isRequired,
   color: PropTypes.oneOf([

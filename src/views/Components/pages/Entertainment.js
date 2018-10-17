@@ -69,7 +69,7 @@ class Entertainment extends React.Component {
                 md={8}
                 className={`${classes.mlAuto} ${classes.mrAuto}`}
               >
-                <h2 className={classes.title}>#whatiswrongwithmydog</h2>
+                <h2 className={classes.title}>Dogs are awesome!</h2>
                 <br />
                 {this.props.posts.map((post, key) => (
                   <Card plain blog className={classes.card4}>

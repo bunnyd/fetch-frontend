@@ -18,8 +18,6 @@ import "./App.css";
 
 class App extends Component {
   componentDidMount() {
-    console.log("jwt", localStorage.jwt);
-
     if (localStorage.jwt !== undefined) {
       fetch("http://localhost:3000/authenticate", {
         method: "POST",

@@ -74,6 +74,10 @@ const navPillsStyle = theme => ({
     color: "inherit"
   },
   contentWrapper: {
+    marginTop: "20px",
+    width: "1500px"
+  },
+  contentWrapperProfile: {
     marginTop: "20px"
   },
   primary: {
