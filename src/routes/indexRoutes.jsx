@@ -1,7 +1,8 @@
 //pages
 import Home from "../views/HomePage/Home";
 import Entertainment from "../views/Components/pages/Entertainment";
-import Signup from "../views/Components/pages/Signup";
+import SignupUser from "../views/Components/pages/SignupUser";
+import SignupDog from "../views/Components/pages/SignupDog";
 
 var indexRoutes = [
   { path: "/", name: "HomePage", component: Home },
@@ -10,7 +11,8 @@ var indexRoutes = [
     name: "DogsAreAwesome",
     component: Entertainment
   },
-  { path: "/signup", name: "SignupPage", component: Signup }
+  { path: "/signup", name: "SignupPage", component: SignupUser },
+  { path: "/signup-dog", name: "SignupDogPage", component: SignupDog }
 ];
 
 export default indexRoutes;

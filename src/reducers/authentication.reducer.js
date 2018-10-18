@@ -7,10 +7,10 @@ const defaultState = {
 
 export function authentication(state = defaultState, action) {
   switch (action.type) {
-    case userConstants.LOGIN_REQUEST:
+    case userConstants.LOGIN_SUCCESS:
       return {
         loggingIn: true,
-        user: action.user
+        user: action.user.owner
       };
     case userConstants.LOGOUT:
       return {};

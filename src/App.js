@@ -5,15 +5,13 @@ import NavBar from "views/Components/layout/NavBar";
 import indexRoutes from "routes/indexRoutes.jsx";
 import loggedInRoutes from "routes/loggedInRoutes.jsx";
 
-//redux
+import NotFound from "views/Components/pages/NotFound";
+
 //redux
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
 import store from "./store/store";
 import { userConstants } from "./actions/types";
 
-//bootstrap
-import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
 class App extends Component {
@@ -30,11 +28,11 @@ class App extends Component {
       })
         .then(data => data.json())
         .then(user => {
-          console.log(user);
           store.dispatch({ type: userConstants.SET_USER, payload: user.owner });
         });
     }
   }
+  // <Route path="*" component={NotFound} />
 
   render() {
     return (

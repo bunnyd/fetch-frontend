@@ -4,7 +4,7 @@ export const userService = {
 };
 
 function login(email, password) {
-  const requestOptions = {
+  return fetch("http://localhost:3000/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -13,9 +13,7 @@ function login(email, password) {
         password: password
       }
     })
-  };
-
-  return fetch("http://localhost:3000/login", requestOptions)
+  })
     .then(handleResponse)
     .then(user => {
       // login successful if there's a jwt token in the response
@@ -34,7 +32,6 @@ function login(email, password) {
         // );
         // localStorage.setItem("user-zip", JSON.stringify(user.owner.zip_code));
       }
-
       return user;
     });
 }
@@ -60,6 +57,14 @@ function logout() {
 //   );
 // }
 
+function register(user) {
+  return fetch("http://localhost:3000/owners", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user)
+  }).then(handleResponse);
+}
+
 function handleResponse(response) {
   return response.text().then(text => {
     const data = text && JSON.parse(text);
@@ -68,7 +73,6 @@ function handleResponse(response) {
         // auto logout if 401 response returned from api
         logout();
       }
-
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);
     }

@@ -42,6 +42,7 @@ const headerStyle = {
   container: {
     ...container,
     minHeight: "50px",
+    maxHeight: "70px",
     flex: "1",
     alignItems: "center",
     justifyContent: "space-between",
@@ -55,7 +56,8 @@ const headerStyle = {
     ...defaultFont,
     lineHeight: "30px",
     fontSize: "18px",
-    borderRadius: "3px",
+    height: "150px",
+    borderRadius: "300px",
     textTransform: "none",
     color: "inherit",
     "&:hover,&:focus": {

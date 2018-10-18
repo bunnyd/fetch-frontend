@@ -3,6 +3,7 @@ import { userService } from "../_services/user.service";
 import { alertActions } from "./alertActions";
 
 export const userActions = {
+  register,
   login,
   logout,
   setUser
@@ -42,4 +43,32 @@ function logout() {
 
 function setUser(user) {
   return { type: userConstants.SETUSER, payload: user };
+}
+
+function register(user) {
+  return dispatch => {
+    dispatch(request(user));
+
+    userService.register(user).then(
+      user => {
+        dispatch(success());
+        // history.push("/login");
+        dispatch(alertActions.success("Registration successful"));
+      },
+      error => {
+        dispatch(failure(error.toString()));
+        dispatch(alertActions.error(error.toString()));
+      }
+    );
+  };
+
+  function request(user) {
+    return { type: userConstants.REGISTER_REQUEST, user };
+  }
+  function success(user) {
+    return { type: userConstants.REGISTER_SUCCESS, user };
+  }
+  function failure(error) {
+    return { type: userConstants.REGISTER_FAILURE, error };
+  }
 }

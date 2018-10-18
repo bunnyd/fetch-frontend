@@ -54,7 +54,7 @@ class User extends React.Component {
     const { classes, ...rest } = this.props;
 
     // const { user } = this.props;
-    console.log(this.props);
+    console.log("profile props", this.props);
     // debugger;
     let dogs = this.props.user.dogs || [];
     let meetups = this.props.user.meetups || [];
@@ -218,6 +218,7 @@ class User extends React.Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
     user: state.authentication.user
   };

@@ -1,10 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import Password from "@material-ui/icons/Lock";
@@ -109,8 +107,8 @@ class Login extends React.Component {
     );
   }
   render() {
-    console.log("login - props", this.props);
-    console.log("login - state", this.state);
+    // console.log("login - props", this.props);
+    // console.log("login - state", this.state);
 
     const { loggingIn } = this.props;
     const { email, password, submitted } = this.state;
@@ -176,7 +174,7 @@ class Login extends React.Component {
                       </Button>
                     </CardFooter>
                     <CardFooter className={classes.cardFooter}>
-                      <Button simple color="primary" size="sm">
+                      <Button simple color="primary" size="sm" href="/signup">
                         Sign Up Here
                       </Button>
                     </CardFooter>
@@ -192,9 +190,8 @@ class Login extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { loggingIn } = state.authentication;
   return {
-    loggingIn
+    loggingIn: state.authentication
   };
 }
 

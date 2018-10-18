@@ -141,9 +141,6 @@ class Meetups extends React.Component {
 
   handleAttendEvent = e => {
     e.preventDefault();
-    console.log(
-      `I'm coming to ${this.state.joinId} ${this.state.joinLocationName}`
-    );
     // debugger;
     // console.log(`${localStorage.getItem("user-id")}`);
     this.props.meetups.forEach(meetup => {

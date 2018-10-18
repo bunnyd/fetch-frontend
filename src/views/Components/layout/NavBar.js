@@ -24,6 +24,7 @@ import navbarsStyle from "assets/jss/material-kit-react/views/componentsSections
 
 import image from "assets/img/bg.jpg";
 import profileImage from "assets/img/faces/avatar.jpg";
+import logo from "assets/img/logo-white.png";
 
 class NavBar extends React.Component {
   handleLogOut = () => {
@@ -35,7 +36,7 @@ class NavBar extends React.Component {
     return (
       <Header
         href="/"
-        brand="BarkBuddy"
+        brand={logo}
         color="info"
         rightLinks={
           <List className={classes.list}>
