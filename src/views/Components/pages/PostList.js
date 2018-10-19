@@ -1,31 +1,3 @@
-// <Card className={classes.card}>
-//   <CardActionArea>
-//     <CardMedia
-//       className={classes.media}
-//       image={props.post.data.url}
-//       title={props.post.data.title}
-//     />
-//
-//     <CardContent>
-//       <Typography gutterBottom variant="h6" component="h6">
-//         {props.post.data.title}
-//       </Typography>
-//       <Typography component="p" />
-//     </CardContent>
-//   </CardActionArea>
-//   <CardActions>
-//     <Button
-//       variant="raised"
-//       fullWidth="true"
-//       size="small"
-//       color="info"
-//       href={`https://www.reddit.com/${props.post.data.permalink}`}
-//     >
-//       More Details
-//     </Button>
-//   </CardActions>
-// </Card>
-
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
@@ -52,10 +24,10 @@ const styles = {
     height: 500
   }
 };
-
+//
 // {props.post.data.secure_media.reddit_video.length !== 0 ? (video={props.post.data.secure_media.reddit_video.fallback_url}) :
 //           (image={props.post.data.url)}}
-
+//
 // {props.post.data.secure_media.reddit_video.length !== 0 ? (
 //   <ReactPlayer
 //     className="react-player"
@@ -70,7 +42,15 @@ function PostList(props) {
     <Card plain blog className={classes.card4}>
       <CardHeader image plain>
         <a href={`https://www.reddit.com/${props.post.data.permalink}`}>
-          <img src={props.post.data.url} />
+          {props.post.data.is_video ? (
+            <iframe
+              width="420"
+              height="315"
+              src={"https://www.youtube.com/embed/tgbNymZ7vqY"}
+            />
+          ) : (
+            <img src={props.post.data.url} />
+          )}
         </a>
         <div
           className={classes.coloredShadow}

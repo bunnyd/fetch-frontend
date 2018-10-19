@@ -87,6 +87,8 @@ import {
   fetchDogRestaurants
 } from "../../../actions/yelpActions";
 import { getMeetups } from "../../../actions/meetupActions";
+import { userActions } from "../../../actions/userActions";
+import store from "store/store";
 
 import Dashboard from "@material-ui/icons/Dashboard";
 import List from "@material-ui/icons/List";
@@ -163,7 +165,11 @@ class Meetups extends React.Component {
           })
         }) //end fetch
           .then(res => res.json())
-          .then(e => console.log("blah", e));
+          .then(user => {
+            //add user to state
+            // this.props.setUser({ type: "SET_USER", payload: user });
+            store.dispatch({ type: "SET_USER", payload: user });
+          });
         // .then(console.log)
       } //end if
     }); //end forEach
@@ -881,7 +887,8 @@ function mapStateToProps(state) {
 const mapDispatchToProps = {
   fetchDogParks: fetchDogParks,
   fetchDogRestaurants: fetchDogRestaurants,
-  getMeetups: getMeetups
+  getMeetups: getMeetups,
+  setUser: userActions.setUser
 };
 
 export default connect(

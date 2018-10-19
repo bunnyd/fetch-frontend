@@ -69,13 +69,20 @@ class Entertainment extends React.Component {
                 md={8}
                 className={`${classes.mlAuto} ${classes.mrAuto}`}
               >
-                <h2 className={classes.title}>Dogs are awesome!</h2>
+                <h2 className={classes.title}>#whatiswrongwithmydog</h2>
                 <br />
                 {this.props.posts.map((post, key) => (
                   <Card plain blog className={classes.card4}>
                     <CardHeader image plain>
                       <a href={`https://www.reddit.com/${post.data.permalink}`}>
-                        <img src={post.data.url} alt="..." />
+                        {!post.data.is_video ? (
+                          <img src={post.data.url} alt="..." />
+                        ) : (
+                          <iframe
+                            src={post.data.secure_media.reddit_video}
+                            frameBorder="0"
+                          />
+                        )}
                       </a>
                       <div
                         className={classes.coloredShadow}

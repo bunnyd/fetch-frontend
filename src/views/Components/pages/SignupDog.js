@@ -52,6 +52,10 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import Slide from "@material-ui/core/Slide";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormControl from "@material-ui/core/FormControl";
 
 import signupPageStyle from "assets/jss/material-kit-react/views/signupPageStyle.jsx";
 
@@ -68,7 +72,8 @@ class SignupDog extends React.Component {
   constructor() {
     super();
     this.state = {
-      signupModal: false
+      signupModal: false,
+      simpleSelect: ""
     };
   }
 
@@ -95,10 +100,16 @@ class SignupDog extends React.Component {
     this.setState(x);
   }
 
+  handleSimple = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
   handleAddDog = e => {};
 
   render() {
     console.log("signup - props - ", this.props);
+    console.log("signup - state - ", this.state);
+
     const { classes, ...rest } = this.props;
     return (
       <div>
@@ -114,8 +125,8 @@ class SignupDog extends React.Component {
             <GridContainer justify="center">
               <GridItem xs={12} sm={10} md={10}>
                 <Card className={classes.cardSignup}>
-                  <h2 className={classes.cardTitle}>Sign up now!</h2>
-                  <h4 className={classes.cardTitle}>User Information</h4>
+                  <h2 className={classes.cardTitle}>TELL US ABOUT YOUR DOG</h2>
+                  <h4 className={classes.cardTitle}>Dog Information</h4>
                   <CardBody>
                     <form
                       className={classes.form}
@@ -124,159 +135,126 @@ class SignupDog extends React.Component {
                       <GridContainer justify="center">
                         <GridItem xs={12} sm={5} md={5}>
                           <CustomInput
+                            labelText="Name (required)"
+                            id="name"
+                            name="name"
                             formControlProps={{
-                              fullWidth: true,
-                              className: classes.customFormControlClasses
+                              fullWidth: true
                             }}
-                            inputProps={{
-                              startAdornment: (
-                                <InputAdornment
-                                  position="start"
-                                  className={classes.inputAdornment}
-                                >
-                                  <Face
-                                    className={classes.inputAdornmentIcon}
-                                  />
-                                </InputAdornment>
-                              ),
-                              placeholder: "First Name (required)"
+                          />
+                          <FormControl
+                            fullWidth
+                            className={classes.selectFormControl}
+                          >
+                            <InputLabel
+                              htmlFor="simple-select"
+                              className={classes.selectLabel}
+                            >
+                              Age
+                            </InputLabel>
+                            <Select
+                              MenuProps={{
+                                className: classes.selectMenu
+                              }}
+                              classes={{
+                                select: classes.select
+                              }}
+                              value={this.state.simpleSelect}
+                              onChange={this.handleSimple}
+                              inputProps={{
+                                name: "simpleSelect",
+                                id: "simple-select"
+                              }}
+                            >
+                              <MenuItem
+                                disabled
+                                classes={{
+                                  root: classes.selectMenuItem
+                                }}
+                              >
+                                Select Age
+                              </MenuItem>
+                              <MenuItem
+                                classes={{
+                                  root: classes.selectMenuItem,
+                                  selected: classes.selectMenuItemSelected
+                                }}
+                                value="Not Specified"
+                              >
+                                Not Sure
+                              </MenuItem>
+                              <MenuItem
+                                classes={{
+                                  root: classes.selectMenuItem,
+                                  selected: classes.selectMenuItemSelected
+                                }}
+                                value="Puppy"
+                              >
+                                Puppy (over 15 months)
+                              </MenuItem>
+                              <MenuItem
+                                classes={{
+                                  root: classes.selectMenuItem,
+                                  selected: classes.selectMenuItemSelected
+                                }}
+                                value="Adult"
+                              >
+                                Adult (15 months - 7 years)
+                              </MenuItem>
+                              <MenuItem
+                                classes={{
+                                  root: classes.selectMenuItem,
+                                  selected: classes.selectMenuItemSelected
+                                }}
+                                value="Senior"
+                              >
+                                Senior (over 7 years)
+                              </MenuItem>
+                            </Select>
+                          </FormControl>
+                          <CustomInput
+                            labelText="Breed"
+                            id="breed"
+                            name="breed"
+                            formControlProps={{
+                              fullWidth: true
                             }}
                           />
                           <CustomInput
+                            labelText="Size"
+                            id="size"
+                            name="size"
                             formControlProps={{
-                              fullWidth: true,
-                              className: classes.customFormControlClasses
-                            }}
-                            inputProps={{
-                              startAdornment: (
-                                <InputAdornment
-                                  position="start"
-                                  className={classes.inputAdornment}
-                                >
-                                  <Face
-                                    className={classes.inputAdornmentIcon}
-                                  />
-                                </InputAdornment>
-                              ),
-                              placeholder: "Last Name (required)"
-                            }}
-                          />
-                          <CustomInput
-                            formControlProps={{
-                              fullWidth: true,
-                              className: classes.customFormControlClasses
-                            }}
-                            inputProps={{
-                              startAdornment: (
-                                <InputAdornment
-                                  position="start"
-                                  className={classes.inputAdornment}
-                                >
-                                  <Face
-                                    className={classes.inputAdornmentIcon}
-                                  />
-                                </InputAdornment>
-                              ),
-                              placeholder: "Title"
-                            }}
-                          />
-                          <CustomInput
-                            formControlProps={{
-                              fullWidth: true,
-                              className: classes.customFormControlClasses
-                            }}
-                            inputProps={{
-                              startAdornment: (
-                                <InputAdornment
-                                  position="start"
-                                  className={classes.inputAdornment}
-                                >
-                                  <NearMe
-                                    className={classes.inputAdornmentIcon}
-                                  />
-                                </InputAdornment>
-                              ),
-                              placeholder: "Zip Code (required)"
+                              fullWidth: true
                             }}
                           />
                         </GridItem>
                         <GridItem xs={12} sm={5} md={5}>
                           <CustomInput
+                            labelText="Sex"
+                            id="sex"
+                            name="sex"
                             formControlProps={{
-                              fullWidth: true,
-                              className: classes.customFormControlClasses
-                            }}
-                            inputProps={{
-                              startAdornment: (
-                                <InputAdornment
-                                  position="start"
-                                  className={classes.inputAdornment}
-                                >
-                                  <Photo
-                                    className={classes.inputAdornmentIcon}
-                                  />
-                                </InputAdornment>
-                              ),
-                              placeholder: "Picture URL"
+                              fullWidth: true
                             }}
                           />
                           <CustomInput
+                            labelText="Picture URL"
+                            id="picture_url"
+                            name="picture_url"
                             formControlProps={{
-                              fullWidth: true,
-                              className: classes.customFormControlClasses
-                            }}
-                            inputProps={{
-                              startAdornment: (
-                                <InputAdornment
-                                  position="start"
-                                  className={classes.inputAdornment}
-                                >
-                                  <Email
-                                    className={classes.inputAdornmentIcon}
-                                  />
-                                </InputAdornment>
-                              ),
-                              placeholder: "Email (required)"
+                              fullWidth: true
                             }}
                           />
                           <CustomInput
+                            labelText="Short Bio"
+                            id="textarea-input"
                             formControlProps={{
-                              fullWidth: true,
-                              className: classes.customFormControlClasses
+                              fullWidth: true
                             }}
                             inputProps={{
-                              type: "password",
-                              startAdornment: (
-                                <InputAdornment
-                                  position="start"
-                                  className={classes.inputAdornment}
-                                >
-                                  <Password
-                                    className={classes.inputAdornmentIcon}
-                                  />
-                                </InputAdornment>
-                              ),
-                              placeholder: "Password"
-                            }}
-                          />
-                          <CustomInput
-                            formControlProps={{
-                              fullWidth: true,
-                              className: classes.customFormControlClasses
-                            }}
-                            inputProps={{
-                              type: "password",
-                              startAdornment: (
-                                <InputAdornment
-                                  position="start"
-                                  className={classes.inputAdornment}
-                                >
-                                  <Password
-                                    className={classes.inputAdornmentIcon}
-                                  />
-                                </InputAdornment>
-                              ),
-                              placeholder: "Confirm Password"
+                              multiline: true,
+                              rows: 3
                             }}
                           />
                         </GridItem>

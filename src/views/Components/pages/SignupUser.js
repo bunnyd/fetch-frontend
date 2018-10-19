@@ -128,8 +128,6 @@ class SignupUser extends React.Component {
     this.setState(x);
   }
 
-  handleAddDog = e => {};
-
   render() {
     console.log("signup - props - ", this.props);
     console.log("signup - state - ", this.state);
@@ -149,7 +147,7 @@ class SignupUser extends React.Component {
             <GridContainer justify="center">
               <GridItem xs={12} sm={10} md={10}>
                 <Card className={classes.cardSignup}>
-                  <h2 className={classes.cardTitle}>Sign up now!</h2>
+                  <h2 className={classes.cardTitle}>SIGN UP NOW!</h2>
                   <h4 className={classes.cardTitle}>User Information</h4>
                   <CardBody>
                     <form
@@ -301,11 +299,7 @@ class SignupUser extends React.Component {
                           round
                           color="primary"
                           type="submit"
-                          onClick={() =>
-                            this.state.userId > 0
-                              ? this.handleClickOpen("smallModal")
-                              : console.log("click", this.state)
-                          }
+                          onClick={() => this.handleClickOpen("smallModal")}
                         >
                           <Check />
                           Sign me up
@@ -339,34 +333,20 @@ class SignupUser extends React.Component {
                               <Close className={classes.modalClose} />
                             </Button>
                           </DialogTitle>
-                          <DialogContent
-                            id="small-modal-slide-description"
-                            className={
-                              classes.modalBody + " " + classes.modalSmallBody
-                            }
-                          >
-                            <h5>
-                              You&#39;re signed up! <br />
-                              Would you like to add dog(s)?
-                            </h5>
+                          <DialogContent id="small-modal-slide-description">
+                            <h5>You&#39;re signed up!</h5>
                           </DialogContent>
-                          <DialogActions
-                            className={
-                              classes.modalFooter +
-                              " " +
-                              classes.modalFooterCenter
-                            }
-                          >
+                          <DialogActions>
                             <Button
-                              href="/login"
+                              href="/"
                               onClick={() => this.handleClose("smallModal")}
                               link
                               className={classes.modalSmallFooterFirstButton}
                             >
-                              Not Now
+                              Home
                             </Button>
                             <Button
-                              href="/signup-dog"
+                              href="/login"
                               onClick={e => {
                                 this.handleClose("smallModal");
                                 this.handleAddDog(e);
@@ -379,7 +359,7 @@ class SignupUser extends React.Component {
                                 classes.modalSmallFooterSecondButton
                               }
                             >
-                              Yes
+                              Login
                             </Button>
                           </DialogActions>
                         </Dialog>

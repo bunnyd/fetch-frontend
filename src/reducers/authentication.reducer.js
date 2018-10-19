@@ -1,7 +1,9 @@
 import { userConstants } from "../actions/types";
 
 const defaultState = {
-  user: {},
+  user: {
+    meetups: []
+  },
   loggedIn: false
 };
 

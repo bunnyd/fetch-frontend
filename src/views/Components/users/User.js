@@ -13,6 +13,8 @@ import Camera from "@material-ui/icons/Camera";
 import People from "@material-ui/icons/People";
 import Add from "@material-ui/icons/Add";
 import Favorite from "@material-ui/icons/Favorite";
+import AddCircle from "@material-ui/icons/AddCircle";
+
 // core components
 import Header from "components/Header/Header.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -57,7 +59,7 @@ class User extends React.Component {
     console.log("profile props", this.props);
     // debugger;
     let dogs = this.props.user.dogs || [];
-    let meetups = this.props.user.meetups || [];
+    // let meetups = this.props.user.meetups || [];
 
     const imageClasses = classNames(
       classes.imgRaised,
@@ -113,7 +115,7 @@ class User extends React.Component {
                         >
                           <h4 className={classes.title}>My Meetups</h4>
 
-                          {meetups.map(meetup => {
+                          {this.props.user.meetups.map(meetup => {
                             return (
                               <Card
                                 background
@@ -202,6 +204,17 @@ class User extends React.Component {
                                 </Card>
                               );
                             })}
+                            <GridContainer justify="center">
+                              <GridItem xs={12} sm={12} md={5}>
+                                <Button
+                                  href="/signup-dog"
+                                  color="primary"
+                                  round
+                                >
+                                  <AddCircle /> &nbsp;&nbsp;Add a dog
+                                </Button>
+                              </GridItem>
+                            </GridContainer>
                           </GridItem>
                         </GridContainer>
                       </div>
