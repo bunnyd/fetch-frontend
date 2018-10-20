@@ -132,12 +132,11 @@ class Meetups extends React.Component {
       scheduleLocationName: "",
       scheduleAddress: "",
       scheduleZipCode: "",
-      scheduleImageUrl: ""
+      scheduleImageUrl: "",
+      currentUserZipCode: ""
     };
   }
   componentDidMount() {
-    this.props.fetchDogParks();
-    this.props.fetchDogRestaurants();
     this.props.getMeetups();
   }
 
@@ -170,7 +169,6 @@ class Meetups extends React.Component {
             // this.props.setUser({ type: "SET_USER", payload: user });
             store.dispatch({ type: "SET_USER", payload: user });
           });
-        // .then(console.log)
       } //end if
     }); //end forEach
   };
@@ -181,8 +179,7 @@ class Meetups extends React.Component {
     const scheduleDate = dateFormat(e.target[3].value, "yyyymmdd");
 
     const scheduleTime = e.target[4].value;
-    console.log(scheduleDate);
-    console.log("time", scheduleTime);
+
     // debugger;
     // this.props.meetups.forEach(meetup => {
     //   if (this.state.scheduleLocationName === meetup.name) {
@@ -239,9 +236,22 @@ class Meetups extends React.Component {
   render() {
     // debugger;
     console.log("meetup page - props", this.props);
+
     console.log("meetup", this.state);
 
+    console.log("meetup page - zip", this.props.user.zip_code);
+
     const { classes } = this.props;
+
+    const { yelpDogParksLoaded, yelpDogRestaurantsLoaded } = this.props;
+
+    if (!yelpDogParksLoaded) {
+      this.props.fetchDogParks(this.props.user.zip_code);
+    }
+
+    if (!yelpDogRestaurantsLoaded) {
+      this.props.fetchDogRestaurants(this.props.user.zip_code);
+    }
 
     const CustomTableCell = withStyles(theme => ({
       head: {
@@ -868,10 +878,6 @@ class Meetups extends React.Component {
     );
   }
 }
-
-Meetups.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 function mapStateToProps(state) {
   return {

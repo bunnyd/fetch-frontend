@@ -220,14 +220,76 @@ class SignupDog extends React.Component {
                               fullWidth: true
                             }}
                           />
-                          <CustomInput
-                            labelText="Size"
-                            id="size"
-                            name="size"
-                            formControlProps={{
-                              fullWidth: true
-                            }}
-                          />
+                          <FormControl
+                            fullWidth
+                            className={classes.selectFormControl}
+                          >
+                            <InputLabel
+                              htmlFor="simple-select"
+                              className={classes.selectLabel}
+                            >
+                              Age
+                            </InputLabel>
+                            <Select
+                              MenuProps={{
+                                className: classes.selectMenu
+                              }}
+                              classes={{
+                                select: classes.select
+                              }}
+                              value={this.state.simpleSelect}
+                              onChange={this.handleSimple}
+                              inputProps={{
+                                name: "simpleSelect",
+                                id: "simple-select"
+                              }}
+                            >
+                              <MenuItem
+                                disabled
+                                classes={{
+                                  root: classes.selectMenuItem
+                                }}
+                              >
+                                Select Age
+                              </MenuItem>
+                              <MenuItem
+                                classes={{
+                                  root: classes.selectMenuItem,
+                                  selected: classes.selectMenuItemSelected
+                                }}
+                                value="Not Specified"
+                              >
+                                Not Sure
+                              </MenuItem>
+                              <MenuItem
+                                classes={{
+                                  root: classes.selectMenuItem,
+                                  selected: classes.selectMenuItemSelected
+                                }}
+                                value="Puppy"
+                              >
+                                Puppy (over 15 months)
+                              </MenuItem>
+                              <MenuItem
+                                classes={{
+                                  root: classes.selectMenuItem,
+                                  selected: classes.selectMenuItemSelected
+                                }}
+                                value="Adult"
+                              >
+                                Adult (15 months - 7 years)
+                              </MenuItem>
+                              <MenuItem
+                                classes={{
+                                  root: classes.selectMenuItem,
+                                  selected: classes.selectMenuItemSelected
+                                }}
+                                value="Senior"
+                              >
+                                Senior (over 7 years)
+                              </MenuItem>
+                            </Select>
+                          </FormControl>
                         </GridItem>
                         <GridItem xs={12} sm={5} md={5}>
                           <CustomInput
