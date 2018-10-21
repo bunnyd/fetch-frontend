@@ -120,7 +120,7 @@ class Login extends React.Component {
           style={{
             backgroundImage: "url(" + image + ")",
             backgroundSize: "cover",
-            backgroundPosition: "top center"
+            backgroundPosition: "bottom center"
           }}
         >
           <div className={classes.container}>

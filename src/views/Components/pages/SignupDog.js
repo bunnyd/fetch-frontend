@@ -73,7 +73,9 @@ class SignupDog extends React.Component {
     super();
     this.state = {
       signupModal: false,
-      simpleSelect: ""
+      selectedAge: "",
+      selectedSize: "",
+      selectedSex: ""
     };
   }
 
@@ -162,8 +164,8 @@ class SignupDog extends React.Component {
                               value={this.state.simpleSelect}
                               onChange={this.handleSimple}
                               inputProps={{
-                                name: "simpleSelect",
-                                id: "simple-select"
+                                name: "selectedAge",
+                                id: "select-age"
                               }}
                             >
                               <MenuItem
@@ -212,14 +214,6 @@ class SignupDog extends React.Component {
                               </MenuItem>
                             </Select>
                           </FormControl>
-                          <CustomInput
-                            labelText="Breed"
-                            id="breed"
-                            name="breed"
-                            formControlProps={{
-                              fullWidth: true
-                            }}
-                          />
                           <FormControl
                             fullWidth
                             className={classes.selectFormControl}
@@ -228,7 +222,7 @@ class SignupDog extends React.Component {
                               htmlFor="simple-select"
                               className={classes.selectLabel}
                             >
-                              Age
+                              Sex
                             </InputLabel>
                             <Select
                               MenuProps={{
@@ -240,8 +234,8 @@ class SignupDog extends React.Component {
                               value={this.state.simpleSelect}
                               onChange={this.handleSimple}
                               inputProps={{
-                                name: "simpleSelect",
-                                id: "simple-select"
+                                name: "selectedSex",
+                                id: "select-sex"
                               }}
                             >
                               <MenuItem
@@ -250,7 +244,60 @@ class SignupDog extends React.Component {
                                   root: classes.selectMenuItem
                                 }}
                               >
-                                Select Age
+                                Select Sex
+                              </MenuItem>
+                              <MenuItem
+                                classes={{
+                                  root: classes.selectMenuItem,
+                                  selected: classes.selectMenuItemSelected
+                                }}
+                                value="Female"
+                              >
+                                Female
+                              </MenuItem>
+                              <MenuItem
+                                classes={{
+                                  root: classes.selectMenuItem,
+                                  selected: classes.selectMenuItemSelected
+                                }}
+                                value="Male"
+                              >
+                                Male
+                              </MenuItem>
+                            </Select>
+                          </FormControl>
+
+                          <FormControl
+                            fullWidth
+                            className={classes.selectFormControl}
+                          >
+                            <InputLabel
+                              htmlFor="simple-select"
+                              className={classes.selectLabel}
+                            >
+                              Size
+                            </InputLabel>
+                            <Select
+                              MenuProps={{
+                                className: classes.selectMenu
+                              }}
+                              classes={{
+                                select: classes.select
+                              }}
+                              value={this.state.simpleSelect}
+                              onChange={this.handleSimple}
+                              inputProps={{
+                                name: "selectedSize",
+                                id: "select-size"
+                              }}
+                            >
+                              <MenuItem
+                                disabled
+                                classes={{
+                                  root: classes.selectMenuItem
+                                }}
+                              >
+                                Select Size
                               </MenuItem>
                               <MenuItem
                                 classes={{
@@ -266,36 +313,45 @@ class SignupDog extends React.Component {
                                   root: classes.selectMenuItem,
                                   selected: classes.selectMenuItemSelected
                                 }}
-                                value="Puppy"
+                                value="XS"
                               >
-                                Puppy (over 15 months)
+                                XS (0-10 lbs)
                               </MenuItem>
                               <MenuItem
                                 classes={{
                                   root: classes.selectMenuItem,
                                   selected: classes.selectMenuItemSelected
                                 }}
-                                value="Adult"
+                                value="S"
                               >
-                                Adult (15 months - 7 years)
+                                S (10-20 lbs)
                               </MenuItem>
                               <MenuItem
                                 classes={{
                                   root: classes.selectMenuItem,
                                   selected: classes.selectMenuItemSelected
                                 }}
-                                value="Senior"
+                                value="M"
                               >
-                                Senior (over 7 years)
+                                M (20-50 lbs)
+                              </MenuItem>
+                              <MenuItem
+                                classes={{
+                                  root: classes.selectMenuItem,
+                                  selected: classes.selectMenuItemSelected
+                                }}
+                                value="L"
+                              >
+                                L (over 50 lbs)
                               </MenuItem>
                             </Select>
                           </FormControl>
                         </GridItem>
                         <GridItem xs={12} sm={5} md={5}>
                           <CustomInput
-                            labelText="Sex"
-                            id="sex"
-                            name="sex"
+                            labelText="Breed"
+                            id="breed"
+                            name="breed"
                             formControlProps={{
                               fullWidth: true
                             }}
@@ -316,7 +372,7 @@ class SignupDog extends React.Component {
                             }}
                             inputProps={{
                               multiline: true,
-                              rows: 3
+                              rows: 1
                             }}
                           />
                         </GridItem>
