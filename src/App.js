@@ -28,7 +28,8 @@ class App extends Component {
       })
         .then(data => data.json())
         .then(user => {
-          store.dispatch({ type: userConstants.SET_USER, payload: user.owner });
+          // debugger;
+          store.dispatch({ type: userConstants.SET_USER, payload: user });
         });
     }
   }

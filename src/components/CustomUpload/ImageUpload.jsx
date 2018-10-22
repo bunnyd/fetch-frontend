@@ -5,15 +5,15 @@ import PropTypes from "prop-types";
 // core components
 import Button from "components/CustomButtons/Button.jsx";
 
-import defaultImage from "assets/img/landing.jpg";
-import defaultAvatar from "assets/img/landing.jpg";
+import defaultImage from "assets/img/image_placeholder.jpg";
+import defaultAvatar from "assets/img/placeholder.jpg";
 
 class ImageUpload extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       file: null,
-      imagePreviewUrl: this.props.avatar ? defaultAvatar : defaultImage
+      imagePreviewUrl: this.props.avatar ? defaultAvatar : defaultAvatar
     };
     this.handleImageChange = this.handleImageChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,7 +44,7 @@ class ImageUpload extends React.Component {
   handleRemove() {
     this.setState({
       file: null,
-      imagePreviewUrl: this.props.avatar ? defaultAvatar : defaultImage
+      imagePreviewUrl: this.props.avatar ? defaultAvatar : defaultAvatar
     });
     this.refs.fileInput.value = null;
   }
@@ -57,9 +57,21 @@ class ImageUpload extends React.Component {
     } = this.props;
     return (
       <div className="fileinput text-center">
-        <input type="file" onChange={this.handleImageChange} ref="fileInput" />
+        <div id="fileInput" style={{ display: "none" }}>
+          <input
+            type="file"
+            onChange={this.handleImageChange}
+            ref="fileInput"
+            name="owner[image]"
+          />
+        </div>
         <div className={"thumbnail" + (avatar ? " img-circle" : "")}>
-          <img src={this.state.imagePreviewUrl} alt="..." />
+          <img
+            src={this.state.imagePreviewUrl}
+            alt="..."
+            width="300px"
+            height="auto"
+          />
         </div>
         <div>
           {this.state.file === null ? (

@@ -58,7 +58,7 @@ class User extends React.Component {
     // const { user } = this.props;
     console.log("profile props", this.props);
     // debugger;
-    let dogs = this.props.user.dogs || [];
+    let dogs = (this.props.user && this.props.user.dogs) || [];
     // let meetups = this.props.user.meetups || [];
 
     const imageClasses = classNames(
@@ -81,18 +81,17 @@ class User extends React.Component {
                 <div className={classes.profile}>
                   <div>
                     <img
-                      src={this.props.user.picture_url}
+                      src={this.props.user && this.props.user.picture_url}
                       alt="..."
                       className={imageClasses}
                     />
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>
-                      {`${this.props.user.first_name} ${
-                        this.props.user.last_name
-                      }`}
+                      {`${this.props.user && this.props.user.first_name} ${this
+                        .props.user && this.props.user.last_name}`}
                     </h3>
-                    <h6>{this.props.user.title}</h6>
+                    <h6>{this.props.user && this.props.user.title}</h6>
                   </div>
                 </div>
               </GridItem>

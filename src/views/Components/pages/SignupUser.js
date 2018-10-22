@@ -56,6 +56,7 @@ import Slide from "@material-ui/core/Slide";
 import signupPageStyle from "assets/jss/material-kit-react/views/signupPageStyle.jsx";
 
 import image from "assets/img/signup-bg.jpg";
+import ImageUpload from "components/CustomUpload/ImageUpload.jsx";
 
 import { connect } from "react-redux";
 import { userActions } from "../../../actions/userActions";
@@ -76,34 +77,23 @@ class SignupUser extends React.Component {
   handleRegister(e) {
     e.preventDefault();
     // debugger;
-    const firstName = e.target[0].value;
-    const lastName = e.target[1].value;
-    const jobTitle = e.target[2].value;
-    const zipCode = e.target[3].value;
-    let pictureUrl = e.target[4].value;
-    const emailAddress = e.target[5].value;
-    const pass = e.target[6].value;
-    if (pictureUrl === "") {
-      pictureUrl = null;
-    }
+    // const firstName = e.target[0].value;
+    // const lastName = e.target[1].value;
+    // const jobTitle = e.target[2].value;
+    // const zipCode = e.target[3].value;
+    // const emailAddress = e.target[4].value;
+    // const pass = e.target[5].value;
+    // let pictureUrl = e.target[6].value;
+
+    const data = new FormData(e.target);
+
     fetch(`http://localhost:3000/owners/`, {
       method: "POST",
       credentials: "same-origin",
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
+        // Accept: "application/json"
       },
-      body: JSON.stringify({
-        owner: {
-          first_name: firstName,
-          last_name: lastName,
-          title: jobTitle,
-          picture_url: pictureUrl,
-          zip_code: zipCode,
-          email: emailAddress,
-          password: pass
-        }
-      })
+      body: data
     }) //end fetch
       .then(resp => resp.json())
       .then(
@@ -172,7 +162,8 @@ class SignupUser extends React.Component {
                                   />
                                 </InputAdornment>
                               ),
-                              placeholder: "First Name (required)"
+                              placeholder: "First Name (required)",
+                              name: "owner[first_name]"
                             }}
                           />
                           <CustomInput
@@ -191,7 +182,8 @@ class SignupUser extends React.Component {
                                   />
                                 </InputAdornment>
                               ),
-                              placeholder: "Last Name (required)"
+                              placeholder: "Last Name (required)",
+                              name: "owner[last_name]"
                             }}
                           />
                           <CustomInput
@@ -210,7 +202,8 @@ class SignupUser extends React.Component {
                                   />
                                 </InputAdornment>
                               ),
-                              placeholder: "Title"
+                              placeholder: "Title",
+                              name: "owner[title]"
                             }}
                           />
                           <CustomInput
@@ -229,30 +222,11 @@ class SignupUser extends React.Component {
                                   />
                                 </InputAdornment>
                               ),
-                              placeholder: "Zip Code (required)"
+                              placeholder: "Zip Code (required)",
+                              name: "owner[zip_code]"
                             }}
                           />
-                        </GridItem>
-                        <GridItem xs={12} sm={5} md={5}>
-                          <CustomInput
-                            formControlProps={{
-                              fullWidth: true,
-                              className: classes.customFormControlClasses
-                            }}
-                            inputProps={{
-                              startAdornment: (
-                                <InputAdornment
-                                  position="start"
-                                  className={classes.inputAdornment}
-                                >
-                                  <Photo
-                                    className={classes.inputAdornmentIcon}
-                                  />
-                                </InputAdornment>
-                              ),
-                              placeholder: "Picture URL"
-                            }}
-                          />
+
                           <CustomInput
                             formControlProps={{
                               fullWidth: true,
@@ -269,7 +243,8 @@ class SignupUser extends React.Component {
                                   />
                                 </InputAdornment>
                               ),
-                              placeholder: "Email (required)"
+                              placeholder: "Email (required)",
+                              name: "owner[email]"
                             }}
                           />
                           <CustomInput
@@ -289,8 +264,17 @@ class SignupUser extends React.Component {
                                   />
                                 </InputAdornment>
                               ),
-                              placeholder: "Password"
+                              placeholder: "Password",
+                              name: "owner[password]"
                             }}
+                          />
+                        </GridItem>
+                        <GridItem xs={12} sm={5} md={5}>
+                          <ImageUpload
+                            id="picture_url"
+                            addButtonProps={{ round: true }}
+                            changeButtonProps={{ round: true }}
+                            removeButtonProps={{ round: true, color: "danger" }}
                           />
                         </GridItem>
                       </GridContainer>
@@ -349,7 +333,6 @@ class SignupUser extends React.Component {
                               href="/login"
                               onClick={e => {
                                 this.handleClose("smallModal");
-                                this.handleAddDog(e);
                               }}
                               color="success"
                               simple
