@@ -180,9 +180,6 @@ class Meetups extends React.Component {
 
     const scheduleTime = e.target[4].value;
 
-    // debugger;
-    // this.props.meetups.forEach(meetup => {
-    //   if (this.state.scheduleLocationName === meetup.name) {
     fetch(`http://localhost:3000/meetups/`, {
       method: "POST",
       credentials: "same-origin",
@@ -199,8 +196,7 @@ class Meetups extends React.Component {
         time: scheduleTime
       })
     }) //end fetch
-      .then(resp => resp.json())
-      .then(message => console.log(message));
+      .then(resp => resp.json());
   };
 
   handleClickOpen(modal, row = null, dogPark = null) {

@@ -17,28 +17,17 @@
 import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-// @material-ui/icons
-import TrendingUp from "@material-ui/icons/TrendingUp";
+
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
-import Info from "components/Typography/Info.jsx";
-import Danger from "components/Typography/Danger.jsx";
 import Success from "components/Typography/Success.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 
 import blogsStyle from "assets/jss/material-kit-react/views/sectionsSections/blogsStyle.jsx";
-
-import cardBlog4 from "assets/img/examples/studio-1.jpg";
-import office2 from "assets/img/landing.jpg";
-import blog5 from "assets/img/examples/studio-2.jpg";
-import blog6 from "assets/img/examples/studio-3.jpg";
-import blog7 from "assets/img/examples/studio-4.jpg";
-import blog8 from "assets/img/examples/studio-5.jpg";
-import bg5 from "assets/img/bg7.jpg";
 
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
