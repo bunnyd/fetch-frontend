@@ -42,7 +42,6 @@ function logout() {
 }
 
 function setUser(user) {
-  debugger;
   return { type: userConstants.SET_USER, payload: user };
 }
 

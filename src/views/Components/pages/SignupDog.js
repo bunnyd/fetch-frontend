@@ -38,10 +38,6 @@ class SignupDog extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    // debugger;
-    // const inputName = e.target[0].value;
-    // const inputBreed = e.target[4].value;
-    // const inputShortBio = e.target[6].value;
 
     const data = new FormData(e.target);
 
