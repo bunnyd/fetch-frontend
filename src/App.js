@@ -28,7 +28,6 @@ class App extends Component {
       })
         .then(data => data.json())
         .then(user => {
-          // debugger;
           store.dispatch({ type: userConstants.SET_USER, payload: user });
         });
     }
@@ -58,6 +57,7 @@ class App extends Component {
                   path={prop.path}
                   key={key}
                   component={prop.component}
+                  //loggedInUser={this.state.loggedInUser}
                 />
               );
             })}

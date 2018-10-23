@@ -42,7 +42,8 @@ function logout() {
 }
 
 function setUser(user) {
-  return { type: userConstants.SETUSER, payload: user };
+  debugger;
+  return { type: userConstants.SET_USER, payload: user };
 }
 
 function register(user) {

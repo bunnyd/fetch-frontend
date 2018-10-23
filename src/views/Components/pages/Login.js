@@ -63,40 +63,6 @@ class Login extends React.Component {
     }
   }
 
-  // validateUser = event => {
-  //   event.preventDefault();
-  //   let email = event.target.email.value;
-  //   let password = event.target.password.value;
-  //
-  //   console.log(email);
-  //   console.log(password);
-  //   fetch("http://localhost:3000/login", {
-  //     method: "POST",
-  //     credentials: "same-origin",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //       owner: {
-  //         email: email,
-  //         password: password
-  //       }
-  //     })
-  //   })
-  //     .then(res => res.json())
-  //     .then(
-  //       res =>
-  //         res.jwt
-  //           ? (localStorage.setItem("jwt", res.jwt),
-  //             this.setState({ loggedIn: true }))
-  //           : console.log(res)
-  //     )
-  //     .then(
-  //       _ => (this.state.loggedIn ? this.props.history.push("/profile") : null)
-  //     );
-  // };
-
   componentDidMount() {
     // we add a hidden class to the card and after 700 ms we delete it and the transition appears
     setTimeout(
