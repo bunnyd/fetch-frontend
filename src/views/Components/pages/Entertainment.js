@@ -1,19 +1,3 @@
-// <div>
-//   <div className={classes.section}>
-//     <div className={classes.container}>
-//       <GridContainer className={classes.textCenter} justify="center">
-//         <GridItem xs={24} sm={24} md={24}>
-//           <GridList cols={3}>
-//             {this.props.posts.map((post, key) => (
-//               <PostList post={post} />
-//             ))}
-//           </GridList>
-//         </GridItem>
-//       </GridContainer>
-//     </div>
-//   </div>
-// </div>
-
 import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -58,19 +42,49 @@ class Entertainment extends React.Component {
                 md={8}
                 className={`${classes.mlAuto} ${classes.mrAuto}`}
               >
-                <h2 className={classes.title}>#whatiswrongwithmydog</h2>
+                <h2 className={classes.title}>#whatswrongwithmydog</h2>
                 <br />
                 {this.props.posts.map((post, key) => (
                   <Card plain blog className={classes.card4}>
                     <CardHeader image plain>
                       <a href={`https://www.reddit.com/${post.data.permalink}`}>
-                        {!post.data.is_video ? (
-                          <img src={post.data.url} alt="..." />
+                        {post.data.media === null &&
+                        !post.data.crosspost_parent_list ? (
+                          <Card className={classes.card4}>
+                            <img src={post.data.url} alt="..." />
+                          </Card>
                         ) : (
-                          <iframe
-                            src={post.data.secure_media.reddit_video}
-                            frameBorder="0"
-                          />
+                          <div className="ui embed">
+                            {post.data.preview.reddit_video_preview ? (
+                              <iframe
+                                src={
+                                  post.data.preview.reddit_video_preview
+                                    .fallback_url
+                                }
+                                frameBorder="0"
+                              />
+                            ) : (
+                              <div>
+                                {post.data.crosspost_parent_list ? (
+                                  <iframe
+                                    src={
+                                      post.data.crosspost_parent_list[0]
+                                        .secure_media.reddit_video.fallback_url
+                                    }
+                                    frameBorder="0"
+                                  />
+                                ) : (
+                                  <iframe
+                                    src={
+                                      post.data.media.reddit_video.fallback_url
+                                    }
+                                    frameBorder="0"
+                                  />
+                                )}
+                                null
+                              </div>
+                            )}
+                          </div>
                         )}
                       </a>
                       <div
