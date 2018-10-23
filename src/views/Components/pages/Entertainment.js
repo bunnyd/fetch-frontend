@@ -1,6 +1,7 @@
 import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
+import CardMedia from "@material-ui/core/CardMedia";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -62,6 +63,8 @@ class Entertainment extends React.Component {
                                     .fallback_url
                                 }
                                 frameBorder="0"
+                                height="400"
+                                width="728"
                               />
                             ) : (
                               <div>
@@ -72,6 +75,8 @@ class Entertainment extends React.Component {
                                         .secure_media.reddit_video.fallback_url
                                     }
                                     frameBorder="0"
+                                    height="400"
+                                    width="728"
                                   />
                                 ) : (
                                   <iframe
@@ -79,9 +84,10 @@ class Entertainment extends React.Component {
                                       post.data.media.reddit_video.fallback_url
                                     }
                                     frameBorder="0"
+                                    height="400"
+                                    width="728"
                                   />
                                 )}
-                                null
                               </div>
                             )}
                           </div>

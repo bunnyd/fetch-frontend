@@ -87,7 +87,6 @@ class User extends React.Component {
                     />
                   </div>
                   <div className={classes.name}>
-                    <br />
                     <h3 className={classes.title}>
                       {`${this.props.user && this.props.user.first_name} ${this
                         .props.user && this.props.user.last_name}`}
