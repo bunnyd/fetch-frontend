@@ -114,34 +114,37 @@ class User extends React.Component {
                         >
                           <h4 className={classes.title}>My Meetups</h4>
 
-                          {this.props.user.meetups.map(meetup => {
-                            return (
-                              <Card
-                                background
-                                style={{
-                                  backgroundImage: `url(${meetup.picture_url})`
-                                }}
-                              >
-                                <a href="#" />
-                                <CardBody
+                          {this.props.user &&
+                            this.props.user.meetups.map(meetup => {
+                              return (
+                                <Card
                                   background
-                                  className={classes.cardBody}
+                                  style={{
+                                    backgroundImage: `url(${
+                                      meetup.picture_url
+                                    })`
+                                  }}
                                 >
-                                  <Badge
-                                    color="warning"
-                                    className={classes.badge}
+                                  <a href="#" />
+                                  <CardBody
+                                    background
+                                    className={classes.cardBody}
                                   >
-                                    {`${meetup.date}, ${meetup.time}`}
-                                  </Badge>
-                                  <a href={meetup.url}>
-                                    <h2 className={classes.cardTitleWhite}>
-                                      {meetup.location_name}
-                                    </h2>
-                                  </a>
-                                </CardBody>
-                              </Card>
-                            );
-                          })}
+                                    <Badge
+                                      color="warning"
+                                      className={classes.badge}
+                                    >
+                                      {`${meetup.date}, ${meetup.time}`}
+                                    </Badge>
+                                    <a href={meetup.url}>
+                                      <h2 className={classes.cardTitleWhite}>
+                                        {meetup.location_name}
+                                      </h2>
+                                    </a>
+                                  </CardBody>
+                                </Card>
+                              );
+                            })}
                         </GridItem>
                       </GridContainer>
                     )
@@ -160,7 +163,12 @@ class User extends React.Component {
                           >
                             {dogs.map(dog => {
                               return (
-                                <Card profile plain className={classes.card}>
+                                <Card
+                                  profile
+                                  plain
+                                  className={classes.card}
+                                  key={dog.id}
+                                >
                                   <GridContainer>
                                     <GridItem xs={12} sm={12} md={5}>
                                       <CardHeader image plain>

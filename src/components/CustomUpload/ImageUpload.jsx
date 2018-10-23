@@ -50,11 +50,13 @@ class ImageUpload extends React.Component {
   }
   render() {
     var {
+      name,
       avatar,
       addButtonProps,
       changeButtonProps,
       removeButtonProps
     } = this.props;
+    const inputName = name + "[image]";
     return (
       <div className="fileinput text-center">
         <div id="fileInput" style={{ display: "none" }}>
@@ -62,7 +64,7 @@ class ImageUpload extends React.Component {
             type="file"
             onChange={this.handleImageChange}
             ref="fileInput"
-            name="owner[image]"
+            name={inputName}
           />
         </div>
         <div className={"thumbnail" + (avatar ? " img-circle" : "")}>
@@ -99,6 +101,7 @@ class ImageUpload extends React.Component {
 }
 
 ImageUpload.propTypes = {
+  name: PropTypes.string,
   avatar: PropTypes.bool,
   addButtonProps: PropTypes.object,
   changeButtonProps: PropTypes.object,

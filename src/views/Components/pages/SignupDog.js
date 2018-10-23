@@ -16,6 +16,8 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 
+import ImageUpload from "components/CustomUpload/ImageUpload.jsx";
+
 import signupPageStyle from "assets/jss/material-kit-react/views/signupPageStyle.jsx";
 
 import image from "assets/img/signup-bg.jpg";
@@ -28,45 +30,36 @@ class SignupDog extends React.Component {
     super();
     this.state = {
       signupModal: false,
-      selectedAge: "",
-      selectedSize: "",
-      selectedSex: ""
+      "dog[age]": "",
+      "dog[sex]": "",
+      "dog[size]": ""
     };
   }
 
   handleSubmit = e => {
     e.preventDefault();
     // debugger;
-    const inputName = e.target[0].value;
-    const inputBreed = e.target[4].value;
-    const inputShortBio = e.target[6].value;
+    // const inputName = e.target[0].value;
+    // const inputBreed = e.target[4].value;
+    // const inputShortBio = e.target[6].value;
+
+    const data = new FormData(e.target);
 
     fetch(`http://localhost:3000/dogs/`, {
       method: "POST",
       credentials: "same-origin",
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
+        // "Content-Type": "application/json",
+        // Accept: "application/json"
       },
-      body: JSON.stringify({
-        dog: {
-          name: inputName,
-          age: this.state.selectedAge,
-          sex: this.state.selectedSex,
-          size: this.state.selectedSize,
-          breed: inputBreed,
-          short_bio: inputShortBio,
-          owner_id: this.props.user.id
-        }
-      })
+      body: data
     }) //end fetch
       .then(resp => resp.json())
-      .then(
-        message =>
-          !message.errors
-            ? this.props.history.push("/profile")
-            : console.log(message)
-      );
+      .then(message => {
+        this.sendOwnerData(message);
+        return this.props.history.push("/profile");
+      })
+      .catch(error => console.log(error));
   };
 
   componentDidMount() {
@@ -89,7 +82,9 @@ class SignupDog extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleAddDog = e => {};
+  sendOwnerData = owner => {
+    this.props.setUser(owner);
+  };
 
   render() {
     console.log("signup - props - ", this.props);
@@ -122,9 +117,11 @@ class SignupDog extends React.Component {
                           <CustomInput
                             labelText="Name (required)"
                             id="name"
-                            name="name"
                             formControlProps={{
                               fullWidth: true
+                            }}
+                            inputProps={{
+                              name: "dog[name]"
                             }}
                           />
                           <FormControl
@@ -144,11 +141,12 @@ class SignupDog extends React.Component {
                               classes={{
                                 select: classes.select
                               }}
-                              value={this.state.selectedAge}
+                              value={this.state["dog[age]"]}
                               onChange={this.handleSimple}
                               inputProps={{
-                                name: "selectedAge",
-                                id: "select-age"
+                                name: "dog[age]",
+                                id: "selectedAge",
+                                value: this.state["dog[age]"]
                               }}
                             >
                               <MenuItem
@@ -214,11 +212,12 @@ class SignupDog extends React.Component {
                               classes={{
                                 select: classes.select
                               }}
-                              value={this.state.selectedSex}
+                              value={this.state["dog[sex]"]}
                               onChange={this.handleSimple}
                               inputProps={{
-                                name: "selectedSex",
-                                id: "select-sex"
+                                name: "dog[sex]",
+                                id: "selectedSex",
+                                value: this.state["dog[sex]"]
                               }}
                             >
                               <MenuItem
@@ -249,7 +248,6 @@ class SignupDog extends React.Component {
                               </MenuItem>
                             </Select>
                           </FormControl>
-
                           <FormControl
                             fullWidth
                             className={classes.selectFormControl}
@@ -267,11 +265,12 @@ class SignupDog extends React.Component {
                               classes={{
                                 select: classes.select
                               }}
-                              value={this.state.selectedSize}
+                              value={this.state["dog[size]"]}
                               onChange={this.handleSimple}
                               inputProps={{
-                                name: "selectedSize",
-                                id: "select-size"
+                                name: "dog[size]",
+                                id: "selectedSize",
+                                value: this.state["dog[size]"]
                               }}
                             >
                               <MenuItem
@@ -329,22 +328,14 @@ class SignupDog extends React.Component {
                               </MenuItem>
                             </Select>
                           </FormControl>
-                        </GridItem>
-                        <GridItem xs={12} sm={5} md={5}>
                           <CustomInput
                             labelText="Breed"
                             id="breed"
-                            name="breed"
                             formControlProps={{
                               fullWidth: true
                             }}
-                          />
-                          <CustomInput
-                            labelText="Picture URL"
-                            id="picture_url"
-                            name="picture_url"
-                            formControlProps={{
-                              fullWidth: true
+                            inputProps={{
+                              name: "dog[breed]"
                             }}
                           />
                           <CustomInput
@@ -355,9 +346,33 @@ class SignupDog extends React.Component {
                             }}
                             inputProps={{
                               multiline: true,
-                              rows: 1
+                              rows: 1,
+                              name: "dog[short_bio]"
                             }}
                           />
+                          <div style={{ display: "none" }}>
+                            <input
+                              type="text"
+                              value={this.props.user && this.props.user.id}
+                              name="dog[owner_id]"
+                            />
+                          </div>
+                        </GridItem>
+                        <GridItem xs={12} sm={5} md={5}>
+                          <ImageUpload
+                            id="picture_url"
+                            addButtonProps={{ round: true }}
+                            changeButtonProps={{ round: true }}
+                            removeButtonProps={{ round: true, color: "danger" }}
+                            name="dog"
+                          >
+                            <input
+                              type="file"
+                              onChange={this.handleImageChange}
+                              ref="fileInput"
+                              name="dog"
+                            />
+                          </ImageUpload>
                         </GridItem>
                       </GridContainer>
                       <div className={classes.textCenter}>
@@ -388,7 +403,11 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = dispatch => {
+  return {
+    setUser: user => userActions.setUser(user)
+  };
+};
 
 export default connect(
   mapStateToProps,

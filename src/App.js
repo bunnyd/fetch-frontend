@@ -58,7 +58,6 @@ class App extends Component {
                   path={prop.path}
                   key={key}
                   component={prop.component}
-                  //loggedInUser={this.state.loggedInUser}
                 />
               );
             })}

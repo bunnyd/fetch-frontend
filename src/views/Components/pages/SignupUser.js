@@ -76,14 +76,6 @@ class SignupUser extends React.Component {
 
   handleRegister(e) {
     e.preventDefault();
-    // debugger;
-    // const firstName = e.target[0].value;
-    // const lastName = e.target[1].value;
-    // const jobTitle = e.target[2].value;
-    // const zipCode = e.target[3].value;
-    // const emailAddress = e.target[4].value;
-    // const pass = e.target[5].value;
-    // let pictureUrl = e.target[6].value;
 
     const data = new FormData(e.target);
 
@@ -94,7 +86,7 @@ class SignupUser extends React.Component {
         // Accept: "application/json"
       },
       body: data
-    }) //end fetch
+    })
       .then(resp => resp.json())
       .then(
         user =>
@@ -275,6 +267,7 @@ class SignupUser extends React.Component {
                             addButtonProps={{ round: true }}
                             changeButtonProps={{ round: true }}
                             removeButtonProps={{ round: true, color: "danger" }}
+                            name="owner"
                           />
                         </GridItem>
                       </GridContainer>
