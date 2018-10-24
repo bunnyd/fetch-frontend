@@ -56,10 +56,9 @@ class User extends React.Component {
     const { classes, ...rest } = this.props;
 
     // const { user } = this.props;
-    console.log("profile props", this.props);
+    // console.log("profile props", this.props);
     // debugger;
     let dogs = (this.props.user && this.props.user.dogs) || [];
-    // let meetups = this.props.user.meetups || [];
 
     const imageClasses = classNames(
       classes.imgRaised,
@@ -136,7 +135,7 @@ class User extends React.Component {
                                     >
                                       {`${meetup.date}, ${meetup.time}`}
                                     </Badge>
-                                    <a href={meetup.url}>
+                                    <a href="/meetup">
                                       <h2 className={classes.cardTitleWhite}>
                                         {meetup.location_name}
                                       </h2>
@@ -172,7 +171,7 @@ class User extends React.Component {
                                   <GridContainer>
                                     <GridItem xs={12} sm={12} md={5}>
                                       <CardHeader image plain>
-                                        <a href="#pablo">
+                                        <a href="#">
                                           <img
                                             src={dog.picture_url}
                                             alt="..."

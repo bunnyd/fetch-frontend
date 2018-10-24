@@ -16,6 +16,7 @@ function login(email, password, history) {
     userService.login(email, password).then(
       user => {
         dispatch(success(user));
+        dispatch({ type: userConstants.SET_USER, payload: user });
         history.push("/profile");
       },
       error => {

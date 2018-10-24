@@ -9,12 +9,11 @@ class Home extends Component {
 
   render() {
     console.log(this.props);
-    return <div>Home</div>;
+    return <div>Real Home</div>;
   }
 }
 
 function mapStateToProps(state) {
-  console.log("Home state -", state);
   return {
     user: state.authentication.user
   };

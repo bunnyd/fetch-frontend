@@ -1,5 +1,5 @@
 //pages
-import Home from "../views/HomePage/Home";
+import Home from "../views/Components/pages/Home";
 import Entertainment from "../views/Components/pages/Entertainment";
 import SignupUser from "../views/Components/pages/SignupUser";
 import SignupDog from "../views/Components/pages/SignupDog";

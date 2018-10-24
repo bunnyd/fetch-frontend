@@ -9,6 +9,11 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import AppBar from "@material-ui/core/AppBar";
+import Typography from "@material-ui/core/Typography";
+
 // import Button from "components/CustomButtons/Button.jsx";
 
 // @material-ui/core components
@@ -96,6 +101,12 @@ import NavPills from "components/NavPills/NavPills.jsx";
 
 import DogPark from "assets/img/dog-park.jpg";
 
+import Muted from "components/Typography/Muted.jsx";
+import Badge from "components/Badge/Badge.jsx";
+import classNames from "classnames";
+
+import profilePageStyle from "assets/jss/material-kit-react/views/profilePageStyle.jsx";
+
 const styles = theme => ({
   root: {
     width: "100%",
@@ -116,6 +127,24 @@ function Transition(props) {
   return <Slide direction="down" {...props} />;
 }
 
+function TabContainer(props) {
+  return (
+    <Typography component="div" style={{ padding: 8 * 3 }}>
+      {props.children}
+    </Typography>
+  );
+}
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+function LinkTab(props) {
+  return (
+    <Tab component="a" onClick={event => event.preventDefault()} {...props} />
+  );
+}
+
 class Meetups extends React.Component {
   anchorElLeft = null;
   anchorElTop = null;
@@ -133,7 +162,9 @@ class Meetups extends React.Component {
       scheduleAddress: "",
       scheduleZipCode: "",
       scheduleImageUrl: "",
-      currentUserZipCode: ""
+      scheduleUrl: "",
+      currentUserZipCode: "",
+      value: 0
     };
   }
   componentDidMount() {
@@ -193,13 +224,14 @@ class Meetups extends React.Component {
         zip_code: this.state.scheduleZipCode,
         date: scheduleDate,
         picture_url: this.state.scheduleImageUrl,
-        time: scheduleTime
+        time: scheduleTime,
+        url: this.state.scheduleUrl
       })
     }) //end fetch
       .then(resp => resp.json());
   };
 
-  handleClickOpen(modal, row = null, dogPark = null) {
+  handleClickOpen(modal, row = null, dogSearch = null) {
     if (row) {
       this.setState({
         joinLocationName: row.location_name,
@@ -208,14 +240,15 @@ class Meetups extends React.Component {
         joinId: row.id
       });
     }
-    if (dogPark) {
+    if (dogSearch) {
       this.setState({
-        scheduleLocationName: dogPark.name,
-        scheduleAddress: `${dogPark.location.display_address[0]}, ${
-          dogPark.location.display_address[1]
+        scheduleLocationName: dogSearch.name,
+        scheduleAddress: `${dogSearch.location.display_address[0]}, ${
+          dogSearch.location.display_address[1]
         }`,
-        scheduleZipCode: dogPark.location.zip_code,
-        scheduleImageUrl: dogPark.image_url
+        scheduleZipCode: dogSearch.location.zip_code,
+        scheduleImageUrl: dogSearch.image_url,
+        scheduleUrl: dogSearch.url
       });
     }
     var x = [];
@@ -229,16 +262,21 @@ class Meetups extends React.Component {
     this.setState(x);
   }
 
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   render() {
-    // debugger;
+    // // debugger;
+
     console.log("meetup page - props", this.props);
-
-    console.log("meetup", this.state);
-
-    console.log("meetup page - zip", this.props.user.zip_code);
+    //
+    // console.log("meetup", this.state);
+    //
+    // console.log("meetup page - zip", this.props.user.zip_code);
 
     const { classes } = this.props;
-
+    const { value } = this.state;
     const { yelpDogParksLoaded, yelpDogRestaurantsLoaded } = this.props;
 
     if (!yelpDogParksLoaded) {
@@ -394,248 +432,14 @@ class Meetups extends React.Component {
         <br />
         <h2 align="center">Schedule a meetup near you!</h2>
         {/*pill start*/}
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={8} lg={6}>
+        <div className={classes.container}>
+          <div className={classes.profileTabs}>
             <NavPills
+              alignCenter
               color="primary"
-              horizontal={{
-                tabsGrid: { xs: 12, sm: 3, md: 4 },
-                contentGrid: { xs: 12, sm: 9, md: 8 }
-              }}
               tabs={[
                 {
-                  tabButton: "Nearby Dog Parks",
-                  tabIcon: Dashboard,
-                  tabContent: (
-                    <span>
-                      <Paper className={classes.root}>
-                        <Table className={classes.table}>
-                          <TableHead>
-                            <TableRow>
-                              <CustomTableCell />
-                              <CustomTableCell numeric>
-                                Location Name
-                              </CustomTableCell>
-                              <CustomTableCell numeric>Address</CustomTableCell>
-                              <CustomTableCell numeric>Rating</CustomTableCell>
-                              <CustomTableCell numeric />
-                              <CustomTableCell numeric>
-                                Create a Meetup
-                              </CustomTableCell>
-                            </TableRow>
-                          </TableHead>
-                          <TableBody>
-                            {this.props.dogParks.map(dogPark => {
-                              return (
-                                <TableRow
-                                  className={classes.dogPark}
-                                  key={dogPark.id}
-                                >
-                                  <CustomTableCell component="th" scope="row">
-                                    <img
-                                      src={dogPark.image_url}
-                                      height="100"
-                                      width="auto"
-                                    />
-                                  </CustomTableCell>
-                                  <CustomTableCell numeric>
-                                    {dogPark.name}
-                                  </CustomTableCell>
-                                  <CustomTableCell numeric>
-                                    {`${dogPark.location.display_address[0]}, ${
-                                      dogPark.location.display_address[1]
-                                    }`}
-                                  </CustomTableCell>
-                                  <CustomTableCell numeric>
-                                    {dogPark.rating}
-                                  </CustomTableCell>
-                                  <CustomTableCell
-                                    component="a"
-                                    href={dogPark.url}
-                                  >
-                                    More Details
-                                  </CustomTableCell>
-                                  <CustomTableCell numeric>
-                                    <Button
-                                      block
-                                      round
-                                      onClick={() =>
-                                        this.handleClickOpen(
-                                          "signupModal",
-                                          null,
-                                          dogPark
-                                        )
-                                      }
-                                    >
-                                      <Schedule /> Schedule
-                                    </Button>
-                                    {/* MEETUP MODAL START */}
-                                    <Dialog
-                                      classes={{
-                                        root: classes.modalRoot,
-                                        paper:
-                                          classes.modal +
-                                          " " +
-                                          classes.modalSignup
-                                      }}
-                                      open={this.state.signupModal}
-                                      TransitionComponent={Transition}
-                                      keepMounted
-                                      onClose={() =>
-                                        this.handleClose("signupModal")
-                                      }
-                                      aria-labelledby="signup-modal-slide-title"
-                                      aria-describedby="signup-modal-slide-description"
-                                    >
-                                      <Card
-                                        plain
-                                        className={classes.modalSignupCard}
-                                      >
-                                        <DialogTitle
-                                          id="signup-modal-slide-title"
-                                          disableTypography
-                                          className={classes.modalHeader}
-                                        >
-                                          <Button
-                                            simple
-                                            className={classes.modalCloseButton}
-                                            key="close"
-                                            aria-label="Close"
-                                            onClick={() =>
-                                              this.handleClose("signupModal")
-                                            }
-                                          >
-                                            <Close
-                                              className={classes.modalClose}
-                                            />
-                                          </Button>
-                                          <h3
-                                            className={`${classes.cardTitle} ${
-                                              classes.modalTitle
-                                            }`}
-                                          >
-                                            Schedule a meetup
-                                          </h3>
-                                        </DialogTitle>
-                                        <DialogContent
-                                          id="signup-modal-slide-description"
-                                          className={classes.modalBody}
-                                        >
-                                          <GridContainer>
-                                            <GridItem
-                                              xs={12}
-                                              sm={5}
-                                              md={5}
-                                              className={classes.mlAuto}
-                                            >
-                                              <br />
-                                              <img
-                                                src={
-                                                  this.state.scheduleImageUrl
-                                                }
-                                                height="auto"
-                                                width="300"
-                                              />
-                                            </GridItem>
-                                            <GridItem
-                                              xs={12}
-                                              sm={5}
-                                              md={5}
-                                              className={classes.mrAuto}
-                                            >
-                                              <form
-                                                ref="inputForm"
-                                                onSubmit={e =>
-                                                  this.handleCreateMeetup(e)
-                                                }
-                                              >
-                                                <CustomInput
-                                                  type="text"
-                                                  labelText="Location"
-                                                  id="float"
-                                                  formControlProps={{
-                                                    fullWidth: true
-                                                  }}
-                                                  inputProps={{
-                                                    value: `${
-                                                      this.state
-                                                        .scheduleLocationName
-                                                    }`
-                                                  }}
-                                                />
-                                                <CustomInput
-                                                  type="text"
-                                                  labelText="Address"
-                                                  id="float"
-                                                  formControlProps={{
-                                                    fullWidth: true
-                                                  }}
-                                                  inputProps={{
-                                                    value: `${
-                                                      this.state.scheduleAddress
-                                                    }`
-                                                  }}
-                                                />
-                                                <CustomInput
-                                                  type="text"
-                                                  labelText="Zip Code"
-                                                  id="float"
-                                                  formControlProps={{
-                                                    fullWidth: true
-                                                  }}
-                                                  inputProps={{
-                                                    value: `${
-                                                      this.state.scheduleZipCode
-                                                    }`
-                                                  }}
-                                                />
-                                                <Datetime
-                                                  name="scheduleDate"
-                                                  format="YYYYMMDD"
-                                                  timeFormat={false}
-                                                  inputProps={{
-                                                    placeholder: "Select Date"
-                                                  }}
-                                                />
-                                                <Datetime
-                                                  name="scheduleTime"
-                                                  dateFormat={false}
-                                                  inputProps={{
-                                                    placeholder: "Select Time"
-                                                  }}
-                                                />
-                                                <div
-                                                  className={classes.textCenter}
-                                                >
-                                                  <Button
-                                                    type="submit"
-                                                    label="submit"
-                                                    color="primary"
-                                                    round
-                                                  >
-                                                    Schedule Meetup
-                                                  </Button>
-                                                </div>
-                                              </form>
-                                            </GridItem>
-                                          </GridContainer>
-                                        </DialogContent>
-                                      </Card>
-                                    </Dialog>
-                                    {/* MEETUP MODAL END */}
-                                  </CustomTableCell>
-                                </TableRow>
-                              );
-                            })}
-                          </TableBody>
-                        </Table>
-                      </Paper>
-                    </span>
-                  )
-                },
-                {
                   tabButton: "Nearby Dog-Friendly Restaurants",
-                  tabIcon: Restaurant,
                   tabContent: (
                     <span>
                       <Paper className={classes.root}>
@@ -864,11 +668,240 @@ class Meetups extends React.Component {
                       </Paper>
                     </span>
                   )
+                },
+                {
+                  tabButton: "Nearby Dog Parks",
+                  tabContent: (
+                    <span>
+                      <Paper className={classes.root}>
+                        <Table className={classes.table}>
+                          <TableHead>
+                            <TableRow>
+                              <CustomTableCell />
+                              <CustomTableCell numeric>
+                                Location Name
+                              </CustomTableCell>
+                              <CustomTableCell numeric>Address</CustomTableCell>
+                              <CustomTableCell numeric>Rating</CustomTableCell>
+                              <CustomTableCell numeric />
+                              <CustomTableCell numeric>
+                                Create a Meetup
+                              </CustomTableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {this.props.dogParks.map(dogPark => {
+                              return (
+                                <TableRow
+                                  className={classes.dogPark}
+                                  key={dogPark.id}
+                                >
+                                  <CustomTableCell component="th" scope="row">
+                                    <img
+                                      src={dogPark.image_url}
+                                      height="100"
+                                      width="auto"
+                                    />
+                                  </CustomTableCell>
+                                  <CustomTableCell numeric>
+                                    {dogPark.name}
+                                  </CustomTableCell>
+                                  <CustomTableCell numeric>
+                                    {`${dogPark.location.display_address[0]}, ${
+                                      dogPark.location.display_address[1]
+                                    }`}
+                                  </CustomTableCell>
+                                  <CustomTableCell numeric>
+                                    {dogPark.rating}
+                                  </CustomTableCell>
+                                  <CustomTableCell
+                                    component="a"
+                                    href={dogPark.url}
+                                  >
+                                    More Details
+                                  </CustomTableCell>
+                                  <CustomTableCell numeric>
+                                    <Button
+                                      block
+                                      round
+                                      onClick={() =>
+                                        this.handleClickOpen(
+                                          "signupModal",
+                                          null,
+                                          dogPark
+                                        )
+                                      }
+                                    >
+                                      <Schedule /> Schedule
+                                    </Button>
+                                    {/* MEETUP MODAL START */}
+                                    <Dialog
+                                      classes={{
+                                        root: classes.modalRoot,
+                                        paper:
+                                          classes.modal +
+                                          " " +
+                                          classes.modalSignup
+                                      }}
+                                      open={this.state.signupModal}
+                                      TransitionComponent={Transition}
+                                      keepMounted
+                                      onClose={() =>
+                                        this.handleClose("signupModal")
+                                      }
+                                      aria-labelledby="signup-modal-slide-title"
+                                      aria-describedby="signup-modal-slide-description"
+                                    >
+                                      <Card
+                                        plain
+                                        className={classes.modalSignupCard}
+                                      >
+                                        <DialogTitle
+                                          id="signup-modal-slide-title"
+                                          disableTypography
+                                          className={classes.modalHeader}
+                                        >
+                                          <Button
+                                            simple
+                                            className={classes.modalCloseButton}
+                                            key="close"
+                                            aria-label="Close"
+                                            onClick={() =>
+                                              this.handleClose("signupModal")
+                                            }
+                                          >
+                                            <Close
+                                              className={classes.modalClose}
+                                            />
+                                          </Button>
+                                          <h3
+                                            className={`${classes.cardTitle} ${
+                                              classes.modalTitle
+                                            }`}
+                                          >
+                                            Schedule a meetup
+                                          </h3>
+                                        </DialogTitle>
+                                        <DialogContent
+                                          id="signup-modal-slide-description"
+                                          className={classes.modalBody}
+                                        >
+                                          <GridContainer>
+                                            <GridItem
+                                              xs={12}
+                                              sm={5}
+                                              md={5}
+                                              className={classes.mlAuto}
+                                            >
+                                              <br />
+                                              <img
+                                                src={
+                                                  this.state.scheduleImageUrl
+                                                }
+                                                height="auto"
+                                                width="300"
+                                              />
+                                            </GridItem>
+                                            <GridItem
+                                              xs={12}
+                                              sm={5}
+                                              md={5}
+                                              className={classes.mrAuto}
+                                            >
+                                              <form
+                                                ref="inputForm"
+                                                onSubmit={e =>
+                                                  this.handleCreateMeetup(e)
+                                                }
+                                              >
+                                                <CustomInput
+                                                  type="text"
+                                                  labelText="Location"
+                                                  id="float"
+                                                  formControlProps={{
+                                                    fullWidth: true
+                                                  }}
+                                                  inputProps={{
+                                                    value: `${
+                                                      this.state
+                                                        .scheduleLocationName
+                                                    }`
+                                                  }}
+                                                />
+                                                <CustomInput
+                                                  type="text"
+                                                  labelText="Address"
+                                                  id="float"
+                                                  formControlProps={{
+                                                    fullWidth: true
+                                                  }}
+                                                  inputProps={{
+                                                    value: `${
+                                                      this.state.scheduleAddress
+                                                    }`
+                                                  }}
+                                                />
+                                                <CustomInput
+                                                  type="text"
+                                                  labelText="Zip Code"
+                                                  id="float"
+                                                  formControlProps={{
+                                                    fullWidth: true
+                                                  }}
+                                                  inputProps={{
+                                                    value: `${
+                                                      this.state.scheduleZipCode
+                                                    }`
+                                                  }}
+                                                />
+                                                <Datetime
+                                                  name="scheduleDate"
+                                                  format="YYYYMMDD"
+                                                  timeFormat={false}
+                                                  inputProps={{
+                                                    placeholder: "Select Date"
+                                                  }}
+                                                />
+                                                <Datetime
+                                                  name="scheduleTime"
+                                                  dateFormat={false}
+                                                  inputProps={{
+                                                    placeholder: "Select Time"
+                                                  }}
+                                                />
+                                                <div
+                                                  className={classes.textCenter}
+                                                >
+                                                  <Button
+                                                    type="submit"
+                                                    label="submit"
+                                                    color="primary"
+                                                    round
+                                                  >
+                                                    Schedule Meetup
+                                                  </Button>
+                                                </div>
+                                              </form>
+                                            </GridItem>
+                                          </GridContainer>
+                                        </DialogContent>
+                                      </Card>
+                                    </Dialog>
+                                    {/* MEETUP MODAL END */}
+                                  </CustomTableCell>
+                                </TableRow>
+                              );
+                            })}
+                          </TableBody>
+                        </Table>
+                      </Paper>
+                    </span>
+                  )
                 }
               ]}
             />
-          </GridItem>
-        </GridContainer>
+          </div>
+        </div>
         {/*pill end*/}
       </div>
     );
@@ -896,4 +929,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(javascriptStyles)(Meetups));
+)(withStyles(profilePageStyle)(Meetups));

@@ -18,19 +18,7 @@ function login(email, password) {
     .then(user => {
       // login successful if there's a jwt token in the response
       if (user.jwt) {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        // localStorage.setItem("user-id", JSON.stringify(user.owner.id));
-
         localStorage.setItem("jwt", user.jwt);
-        // localStorage.setItem(
-        //   "user-fname",
-        //   JSON.stringify(user.owner.first_name)
-        // );
-        // localStorage.setItem(
-        //   "user-lname",
-        //   JSON.stringify(user.owner.last_name)
-        // );
-        // localStorage.setItem("user-zip", JSON.stringify(user.owner.zip_code));
       }
       return user;
     });

@@ -1,5 +1,5 @@
 //meetups
-import AddMeetup from "../views/Components/meetups/AddMeetup";
+import Meetup from "../views/Components/meetups/Meetup";
 import Meetups from "../views/Components/meetups/Meetups";
 
 //users
@@ -16,7 +16,7 @@ var loggedInRoutes = [
   { path: "/profile", name: "ProfilePage", component: User },
   { path: "/edit-account", name: "EditAccountPage", component: EditUser },
   { path: "/meetups", name: "MeetupsPage", component: Meetups },
-  { path: "/add-meetup", name: "AddMeetupPage", component: AddMeetup }
+  { path: "/meetup", name: "MeetupPage", component: Meetup }
 ];
 
 export default loggedInRoutes;
