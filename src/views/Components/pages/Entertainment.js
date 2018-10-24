@@ -28,12 +28,28 @@ class Entertainment extends React.Component {
     const { classes, ...rest } = this.props;
 
     if (!this.props.arePostsLoaded) {
-      return <div>Loading...</div>;
+      return (
+        <div className="cd-section" {...rest}>
+          <div className={classes.blog}>
+            <div className={classes.container}>
+              <GridContainer>
+                <GridItem
+                  xs={12}
+                  sm={8}
+                  md={8}
+                  className={`${classes.mlAuto} ${classes.mrAuto}`}
+                >
+                  <h2 className={classes.title}>Loading.......</h2>
+                </GridItem>
+              </GridContainer>
+            </div>
+          </div>
+        </div>
+      );
     }
 
     return (
       <div className="cd-section" {...rest}>
-        {/* Blogs 4 START */}
         <div className={classes.blog}>
           <div className={classes.container}>
             <GridContainer>
@@ -66,30 +82,39 @@ class Entertainment extends React.Component {
                                 height="400"
                                 width="728"
                               />
-                            ) : (
-                              <div>
-                                {post.data.crosspost_parent_list ? (
-                                  <iframe
-                                    src={
-                                      post.data.crosspost_parent_list[0]
-                                        .secure_media.reddit_video.fallback_url
-                                    }
-                                    frameBorder="0"
-                                    height="400"
-                                    width="728"
-                                  />
-                                ) : (
-                                  <iframe
-                                    src={
-                                      post.data.media.reddit_video.fallback_url
-                                    }
-                                    frameBorder="0"
-                                    height="400"
-                                    width="728"
-                                  />
-                                )}
-                              </div>
-                            )}
+                            ) : post.data.crosspost_parent_list ? (
+                              post.data.crosspost_parent_list[0].media ===
+                              null ? (
+                                <Card className={classes.card4}>
+                                  <img src={post.data.url} alt="..." />
+                                </Card>
+                              ) : (
+                                <div>
+                                  {post.data.crosspost_parent_list ? (
+                                    <iframe
+                                      src={
+                                        post.data.crosspost_parent_list[0]
+                                          .secure_media.reddit_video
+                                          .fallback_url
+                                      }
+                                      frameBorder="0"
+                                      height="400"
+                                      width="728"
+                                    />
+                                  ) : (
+                                    <iframe
+                                      src={
+                                        post.data.media.reddit_video
+                                          .fallback_url
+                                      }
+                                      frameBorder="0"
+                                      height="400"
+                                      width="728"
+                                    />
+                                  )}
+                                </div>
+                              )
+                            ) : null}
                           </div>
                         )}
                       </a>
@@ -128,7 +153,6 @@ class Entertainment extends React.Component {
             </GridContainer>
           </div>
         </div>
-        {/* Blogs 4 END */}
       </div>
     );
   }

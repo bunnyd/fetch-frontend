@@ -16,7 +16,7 @@ var loggedInRoutes = [
   { path: "/profile", name: "ProfilePage", component: User },
   { path: "/edit-account", name: "EditAccountPage", component: EditUser },
   { path: "/meetups", name: "MeetupsPage", component: Meetups },
-  { path: "/meetup", name: "MeetupPage", component: Meetup }
+  { path: "/meetups/:id", name: "MeetupPage", component: Meetup }
 ];
 
 export default loggedInRoutes;

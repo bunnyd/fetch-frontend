@@ -1,22 +1,23 @@
 import { GET_MEETUPS, GET_MEETUP } from "../actions/types";
 
-const defaultState = {
-  meetups: [],
-  meetup: {}
-};
+// const defaultState = {
+//   meetups: [],
+//   meetup: {}
+// };
 
-export default function(state = defaultState, action) {
+export function meetups(state = [], action) {
   switch (action.type) {
     case GET_MEETUPS:
-      return {
-        ...state,
-        meetups: action.payload
-      };
+      return [...action.payload];
+    default:
+      return state;
+  }
+}
+
+export function meetup(state = {}, action) {
+  switch (action.type) {
     case GET_MEETUP:
-      return {
-        ...state,
-        meetup: action.payload
-      };
+      return { ...action.payload };
     default:
       return state;
   }

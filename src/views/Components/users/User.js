@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -40,6 +41,9 @@ import profilePageStyle from "assets/jss/material-kit-react/views/profilePageSty
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { userActions } from "../../../actions/userActions";
+import { getMeetup } from "../../../actions/meetupActions";
+
+import Meetup from "../meetups/Meetup";
 
 class User extends React.Component {
   constructor(props) {
@@ -52,6 +56,12 @@ class User extends React.Component {
     document.body.scrollTop = 0;
   }
 
+  handleMeetup = (event, meetup) => {
+    // set global meetup to selected meetup
+    this.props.getMeetup(meetup.id);
+    // window.history.pushState({}, "", `/meetups/${meetup.id}`);
+    // <Meetup key={meetup.id} meetup={meetup} />;
+  };
   render() {
     const { classes, ...rest } = this.props;
 
@@ -73,6 +83,7 @@ class User extends React.Component {
           filter="dark"
           className={classes.parallax}
         />
+
         <div className={classNames(classes.main, classes.mainRaised)}>
           <div className={classes.container}>
             <GridContainer justify="center">
@@ -117,6 +128,7 @@ class User extends React.Component {
                             this.props.user.meetups.map(meetup => {
                               return (
                                 <Card
+                                  key={meetup.id}
                                   background
                                   style={{
                                     backgroundImage: `url(${
@@ -124,10 +136,10 @@ class User extends React.Component {
                                     })`
                                   }}
                                 >
-                                  <a href="#" />
                                   <CardBody
                                     background
                                     className={classes.cardBody}
+                                    onClick={e => this.handleMeetup(e, meetup)}
                                   >
                                     <Badge
                                       color="warning"
@@ -135,11 +147,11 @@ class User extends React.Component {
                                     >
                                       {`${meetup.date}, ${meetup.time}`}
                                     </Badge>
-                                    <a href="/meetup">
+                                    <Link to={`/meetups/${meetup.id}`}>
                                       <h2 className={classes.cardTitleWhite}>
                                         {meetup.location_name}
                                       </h2>
-                                    </a>
+                                    </Link>
                                   </CardBody>
                                 </Card>
                               );
@@ -242,4 +254,11 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(withStyles(profilePageStyle)(User));
+const mapDispatchToProps = {
+  getMeetup: getMeetup
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(profilePageStyle)(User));

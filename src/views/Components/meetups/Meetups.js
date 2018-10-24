@@ -317,113 +317,117 @@ class Meetups extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {this.props.meetups.map(row => {
-                return (
-                  <TableRow className={classes.row} key={row.id}>
-                    <CustomTableCell component="th" scope="row">
-                      {row.id}
-                    </CustomTableCell>
-                    <CustomTableCell numeric>
-                      {row.location_name}
-                    </CustomTableCell>
-                    <CustomTableCell numeric>{row.date}</CustomTableCell>
-                    <CustomTableCell numeric>{row.time}</CustomTableCell>
-                    <CustomTableCell numeric>{row.address}</CustomTableCell>
-                    <CustomTableCell numeric>
-                      {/* BUTTON SMALL MODAL */}
-                      <Button
-                        block
-                        round
-                        onClick={() => this.handleClickOpen("smallModal", row)}
-                      >
-                        <Check /> Join this meetup
-                      </Button>
-                      {/* SMALL MODAL START */}
-                      <Dialog
-                        classes={{
-                          root: classes.modalRoot,
-                          paper: classes.modal + " " + classes.modalSmall
-                        }}
-                        open={this.state.smallModal}
-                        TransitionComponent={Transition}
-                        keepMounted
-                        onClose={() => this.handleClose("noticeModal")}
-                        aria-labelledby="small-modal-slide-title"
-                        aria-describedby="small-modal-slide-description"
-                      >
-                        <DialogTitle
-                          id="small-modal-slide-title"
-                          disableTypography
-                          className={classes.modalHeader}
-                        >
+              {!this.props.meetups.length
+                ? null
+                : this.props.meetups.map(row => {
+                    return (
+                      <TableRow className={classes.row} key={row.id}>
+                        <CustomTableCell component="th" scope="row">
+                          {row.id}
+                        </CustomTableCell>
+                        <CustomTableCell numeric>
+                          {row.location_name}
+                        </CustomTableCell>
+                        <CustomTableCell numeric>{row.date}</CustomTableCell>
+                        <CustomTableCell numeric>{row.time}</CustomTableCell>
+                        <CustomTableCell numeric>{row.address}</CustomTableCell>
+                        <CustomTableCell numeric>
+                          {/* BUTTON SMALL MODAL */}
                           <Button
-                            simple
-                            className={classes.modalCloseButton}
-                            key="close"
-                            aria-label="Close"
-                            onClick={() => this.handleClose("smallModal")}
-                          >
-                            <Close className={classes.modalClose} />
-                          </Button>
-                        </DialogTitle>
-                        <DialogContent
-                          id="small-modal-slide-description"
-                          className={
-                            classes.modalBody + " " + classes.modalSmallBody
-                          }
-                        >
-                          <h5>
-                            <b>
-                              Please confirm that you want to attend this
-                              meetup:
-                            </b>
-                            <br />
-                            <h6>Location Name:</h6>
-                            <b>{this.state.joinLocationName}</b>
-                            <h6>Date:</h6>
-                            <b>{this.state.joinDate}</b>
-                            <h6>Time:</h6>
-                            <b>{this.state.joinTime}</b>.
-                          </h5>
-                        </DialogContent>
-                        <DialogActions
-                          className={
-                            classes.modalFooter +
-                            " " +
-                            classes.modalFooterCenter
-                          }
-                        >
-                          <Button
-                            default
-                            onClick={() => this.handleClose("smallModal")}
-                            link
-                            className={classes.modalSmallFooterFirstButton}
-                          >
-                            Nevermind
-                          </Button>
-                          <Button
-                            onClick={e => {
-                              this.handleClose("smallModal");
-                              this.handleAttendEvent(e);
-                            }}
-                            color="success"
-                            key={row.id}
-                            default
-                            className={
-                              classes.modalSmallFooterFirstButton +
-                              " " +
-                              classes.modalSmallFooterSecondButton
+                            block
+                            round
+                            onClick={() =>
+                              this.handleClickOpen("smallModal", row)
                             }
                           >
-                            I'll be there!
+                            <Check /> Join this meetup
                           </Button>
-                        </DialogActions>
-                      </Dialog>
-                      {/* SMALL MODAL END */}
-                    </CustomTableCell>
-                  </TableRow>
-                );
-              })}
+                          {/* SMALL MODAL START */}
+                          <Dialog
+                            classes={{
+                              root: classes.modalRoot,
+                              paper: classes.modal + " " + classes.modalSmall
+                            }}
+                            open={this.state.smallModal}
+                            TransitionComponent={Transition}
+                            keepMounted
+                            onClose={() => this.handleClose("noticeModal")}
+                            aria-labelledby="small-modal-slide-title"
+                            aria-describedby="small-modal-slide-description"
+                          >
+                            <DialogTitle
+                              id="small-modal-slide-title"
+                              disableTypography
+                              className={classes.modalHeader}
+                            >
+                              <Button
+                                simple
+                                className={classes.modalCloseButton}
+                                key="close"
+                                aria-label="Close"
+                                onClick={() => this.handleClose("smallModal")}
+                              >
+                                <Close className={classes.modalClose} />
+                              </Button>
+                            </DialogTitle>
+                            <DialogContent
+                              id="small-modal-slide-description"
+                              className={
+                                classes.modalBody + " " + classes.modalSmallBody
+                              }
+                            >
+                              <h5>
+                                <b>
+                                  Please confirm that you want to attend this
+                                  meetup:
+                                </b>
+                                <br />
+                                <h6>Location Name:</h6>
+                                <b>{this.state.joinLocationName}</b>
+                                <h6>Date:</h6>
+                                <b>{this.state.joinDate}</b>
+                                <h6>Time:</h6>
+                                <b>{this.state.joinTime}</b>.
+                              </h5>
+                            </DialogContent>
+                            <DialogActions
+                              className={
+                                classes.modalFooter +
+                                " " +
+                                classes.modalFooterCenter
+                              }
+                            >
+                              <Button
+                                default
+                                onClick={() => this.handleClose("smallModal")}
+                                link
+                                className={classes.modalSmallFooterFirstButton}
+                              >
+                                Nevermind
+                              </Button>
+                              <Button
+                                onClick={e => {
+                                  this.handleClose("smallModal");
+                                  this.handleAttendEvent(e);
+                                }}
+                                color="success"
+                                key={row.id}
+                                default
+                                className={
+                                  classes.modalSmallFooterFirstButton +
+                                  " " +
+                                  classes.modalSmallFooterSecondButton
+                                }
+                              >
+                                I'll be there!
+                              </Button>
+                            </DialogActions>
+                          </Dialog>
+                          {/* SMALL MODAL END */}
+                        </CustomTableCell>
+                      </TableRow>
+                    );
+                  })}
             </TableBody>
           </Table>
         </Paper>
@@ -914,7 +918,7 @@ function mapStateToProps(state) {
     yelpDogParksLoaded: state.yelp.yelpDogParksLoaded,
     dogRestaurants: state.yelp.dogRestaurants,
     yelpDogRestaurantsLoaded: state.yelp.yelpDogRestaurantsLoaded,
-    meetups: state.meetup.meetups,
+    meetups: state.meetups,
     user: state.authentication.user
   };
 }
