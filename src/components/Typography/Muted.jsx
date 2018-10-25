@@ -20,3 +20,6 @@ Muted.propTypes = {
 };
 
 export default withStyles(typographyStyle)(Muted);
+
+// WEBPACK FOOTER //
+// ./src/components/Typography/Muted.jsx
