@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import NavBar from "views/Components/layout/NavBar";
 import indexRoutes from "routes/indexRoutes.jsx";
 import loggedInRoutes from "routes/loggedInRoutes.jsx";
 
-import NotFound from "views/Components/pages/NotFound";
+// import NotFound from "views/Components/pages/NotFound";
 
 //redux
 import { Provider } from "react-redux";

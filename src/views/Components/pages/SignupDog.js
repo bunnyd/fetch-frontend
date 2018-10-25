@@ -408,6 +408,3 @@ export default connect(
   mapStateToProps,
   { setUser: userActions.setUser }
 )(withStyles(signupPageStyle)(SignupDog));
-
-// WEBPACK FOOTER //
-// ./src/views/SignupPage/SignupPage.jsx

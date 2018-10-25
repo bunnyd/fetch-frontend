@@ -29,15 +29,17 @@ class NavBar extends React.Component {
         color="info"
         rightLinks={
           <List className={classes.list}>
-            <ListItem className={classes.listItem}>
-              <Button
-                href="/adopt-a-dog"
-                className={classes.navLink}
-                color="transparent"
-              >
-                Adopt a dog
-              </Button>
-            </ListItem>
+            {localStorage.getItem("jwt") ? (
+              <ListItem className={classes.listItem}>
+                <Button
+                  href="/adopt-a-dog"
+                  className={classes.navLink}
+                  color="transparent"
+                >
+                  Adopt a dog
+                </Button>
+              </ListItem>
+            ) : null}
             <ListItem className={classes.listItem}>
               <Button
                 href="/dogs-are-awesome"
