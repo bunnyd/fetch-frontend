@@ -64,7 +64,7 @@ class NavBar extends React.Component {
               <ListItem className={classes.listItem}>
                 <CustomDropdown
                   left
-                  hoverColor="info"
+                  hoverColor="transparent"
                   buttonText="Profile"
                   buttonProps={{
                     className: classes.navLink,
