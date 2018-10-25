@@ -4,6 +4,7 @@ import yelp from "./yelp.reducer";
 import { meetup, meetups } from "./meetup.reducer";
 import { authentication } from "./authentication.reducer";
 import { alert } from "./alert.reducer";
+import petfinder from "./petfinder.reducer";
 
 const rootReducer = combineReducers({
   reddit: reddit,
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   meetup,
   meetups,
   authentication,
-  alert
+  alert,
+  petfinder
 });
 
 export default rootReducer;

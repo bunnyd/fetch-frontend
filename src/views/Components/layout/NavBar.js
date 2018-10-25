@@ -31,7 +31,7 @@ class NavBar extends React.Component {
           <List className={classes.list}>
             <ListItem className={classes.listItem}>
               <Button
-                href="/adoptadog"
+                href="/adopt-a-dog"
                 className={classes.navLink}
                 color="transparent"
               >
