@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+// @material-ui/core components
+import withStyles from "@material-ui/core/styles/withStyles";
+
+import Paw from "@material-ui/icons/Pets";
+
+// core components
+import GridContainer from "components/Grid/GridContainer.jsx";
+import GridItem from "components/Grid/GridItem.jsx";
+import Parallax from "components/Parallax/Parallax.jsx";
+import componentsStyle from "assets/jss/material-kit-react/views/componentsStyle.jsx";
 
 class Home extends Component {
   constructor(props) {
@@ -8,15 +17,28 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props);
-    return <div>Real Home</div>;
+    const { classes } = this.props;
+
+    return (
+      <Parallax
+        image={require("assets/img/bg-home2.jpg")}
+        className={classes.parallax}
+      >
+        <div className={classes.container}>
+          <GridContainer>
+            <GridItem>
+              <div className={classes.brand}>
+                <h1>Welcome to BarkBuddy 🐾</h1>
+                <h3 className={classes.title}>
+                  Connect with fluffy singles near you!
+                </h3>
+              </div>
+            </GridItem>
+          </GridContainer>
+        </div>
+      </Parallax>
+    );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    user: state.authentication.user
-  };
-}
-
-export default connect(mapStateToProps)(Home);
+export default withStyles(componentsStyle)(Home);

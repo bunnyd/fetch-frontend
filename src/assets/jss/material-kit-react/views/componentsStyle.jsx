@@ -25,7 +25,8 @@ const componentsStyle = {
       fontSize: "4.2rem",
       fontWeight: "600",
       display: "inline-block",
-      position: "relative"
+      position: "relative",
+      top: "-230px"
     },
     "& h3": {
       fontSize: "1.313rem",
@@ -35,7 +36,10 @@ const componentsStyle = {
   },
   title: {
     ...title,
-    color: "#FFFFFF !important"
+    color: "#FFFFFF !important",
+    position: "relative",
+
+    top: "-230px"
   },
   link: {
     textDecoration: "none"
