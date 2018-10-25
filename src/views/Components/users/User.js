@@ -5,22 +5,14 @@ import { Link } from "react-router-dom";
 import classNames from "classnames";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import Tooltip from "@material-ui/core/Tooltip";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
 import Paw from "@material-ui/icons/Pets";
-import Camera from "@material-ui/icons/Camera";
 import People from "@material-ui/icons/People";
-import Add from "@material-ui/icons/Add";
-import Favorite from "@material-ui/icons/Favorite";
 import AddCircle from "@material-ui/icons/AddCircle";
 
 // core components
-import Header from "components/Header/Header.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
-import HeaderLinks from "components/Header/HeaderLinks.jsx";
 import NavPills from "components/NavPills/NavPills.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
@@ -28,22 +20,12 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import Badge from "components/Badge/Badge.jsx";
 import Muted from "components/Typography/Muted.jsx";
 import Parallax from "components/Parallax/Parallax.jsx";
-import Clearfix from "components/Clearfix/Clearfix.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-
-import avatar from "assets/img/faces/avatar.jpg";
-import marc from "assets/img/faces/marc.jpg";
-import kendall from "assets/img/faces/kendall.jpg";
-import cardProfile2Square from "assets/img/faces/card-profile2-square.jpg";
 
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePageStyle.jsx";
 
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { userActions } from "../../../actions/userActions";
 import { getMeetup } from "../../../actions/meetupActions";
-
-import Meetup from "../meetups/Meetup";
 
 class User extends React.Component {
   constructor(props) {
@@ -63,7 +45,7 @@ class User extends React.Component {
     // <Meetup key={meetup.id} meetup={meetup} />;
   };
   render() {
-    const { classes, ...rest } = this.props;
+    const { classes } = this.props;
 
     // const { user } = this.props;
     // console.log("profile props", this.props);
@@ -75,7 +57,6 @@ class User extends React.Component {
       classes.imgRoundedCircle,
       classes.imgFluid
     );
-    const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
     return (
       <div>
         <Parallax

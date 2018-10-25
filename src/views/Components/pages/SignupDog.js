@@ -10,7 +10,6 @@ import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-import Slide from "@material-ui/core/Slide";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -51,6 +50,7 @@ class SignupDog extends React.Component {
       body: data
     }) //end fetch
       .then(resp => resp.json())
+      .then(user => console.log("dog", user))
       .then(message => {
         this.sendOwnerData(message);
         return this.props.history.push("/profile");

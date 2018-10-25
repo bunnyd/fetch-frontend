@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 // import { withStyles } from "@material-ui/core/styles";
@@ -9,82 +8,31 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 
-// import Button from "components/CustomButtons/Button.jsx";
-
-// @material-ui/core components
-// import withStyles from "@material-ui/core/styles/withStyles";
-// material-ui icons
-// import Check from "@material-ui/icons/CheckCircle";
 import Schedule from "@material-ui/icons/Schedule";
-
-// core components
-// import Table from "components/Table/Table.jsx";
-// import Button from "components/CustomButtons/Button.jsx";
-
-import style from "assets/jss/material-kit-react/views/componentsSections/contentAreas.jsx";
 
 //////Modal
 // react plugin for creating date-time-picker
 import Datetime from "react-datetime";
 // @material-ui/core components
-import Restaurant from "@material-ui/icons/Restaurant";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Slide from "@material-ui/core/Slide";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
-import InputLabel from "@material-ui/core/InputLabel";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Tooltip from "@material-ui/core/Tooltip";
-import Popover from "@material-ui/core/Popover";
-import Checkbox from "@material-ui/core/Checkbox";
-import Icon from "@material-ui/core/Icon";
-import TextField from "@material-ui/core/TextField";
 
 // @material-ui/icons
-import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Close from "@material-ui/icons/Close";
-import Notifications from "@material-ui/icons/Notifications";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import Assignment from "@material-ui/icons/Assignment";
-import Mail from "@material-ui/icons/Mail";
-import Face from "@material-ui/icons/Face";
-import Timeline from "@material-ui/icons/Timeline";
-import Password from "@material-ui/icons/Lock";
-import Code from "@material-ui/icons/Code";
-import Group from "@material-ui/icons/Group";
-import Email from "@material-ui/icons/Email";
 import Check from "@material-ui/icons/Check";
-import AttachFile from "@material-ui/icons/AttachFile";
-import Layers from "@material-ui/icons/Layers";
-import Calendar from "@material-ui/icons/CalendarToday";
-import Place from "@material-ui/icons/Place";
-import LocationSearching from "@material-ui/icons/LocationSearching";
-import NearMe from "@material-ui/icons/NearMe";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-import Instruction from "components/Instruction/Instruction.jsx";
 import Card from "components/Card/Card.jsx";
-import CardHeader from "components/Card/CardHeader.jsx";
-import CardBody from "components/Card/CardBody.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-import CustomFileInput from "components/CustomFileInput/CustomFileInput.jsx";
-import InfoArea from "components/InfoArea/InfoArea.jsx";
-import Accordion from "components/Accordion/Accordion.jsx";
-import ImageUpload from "components/CustomUpload/ImageUpload.jsx";
-
-import javascriptStyles from "assets/jss/material-kit-react/views/componentsSections/javascriptStyles.jsx";
 
 import { connect } from "react-redux";
 import {
@@ -95,33 +43,9 @@ import { getMeetups } from "../../../actions/meetupActions";
 import { userActions } from "../../../actions/userActions";
 import store from "store/store";
 
-import Dashboard from "@material-ui/icons/Dashboard";
-import List from "@material-ui/icons/List";
 import NavPills from "components/NavPills/NavPills.jsx";
 
-import DogPark from "assets/img/dog-park.jpg";
-
-import Muted from "components/Typography/Muted.jsx";
-import Badge from "components/Badge/Badge.jsx";
-import classNames from "classnames";
-
 import profilePageStyle from "assets/jss/material-kit-react/views/profilePageStyle.jsx";
-
-const styles = theme => ({
-  root: {
-    width: "100%",
-    marginTop: theme.spacing.unit * 3,
-    overflowX: "auto"
-  },
-  table: {
-    minWidth: 700
-  },
-  row: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.background.default
-    }
-  }
-});
 
 function Transition(props) {
   return <Slide direction="down" {...props} />;
@@ -138,12 +62,6 @@ function TabContainer(props) {
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired
 };
-
-function LinkTab(props) {
-  return (
-    <Tab component="a" onClick={event => event.preventDefault()} {...props} />
-  );
-}
 
 class Meetups extends React.Component {
   anchorElLeft = null;
@@ -276,7 +194,6 @@ class Meetups extends React.Component {
     // console.log("meetup page - zip", this.props.user.zip_code);
 
     const { classes } = this.props;
-    const { value } = this.state;
     const { yelpDogParksLoaded, yelpDogRestaurantsLoaded } = this.props;
 
     if (!yelpDogParksLoaded) {
@@ -566,21 +483,6 @@ class Meetups extends React.Component {
                                               xs={12}
                                               sm={5}
                                               md={5}
-                                              className={classes.mlAuto}
-                                            >
-                                              <br />
-                                              <img
-                                                src={
-                                                  this.state.scheduleImageUrl
-                                                }
-                                                height="auto"
-                                                width="300"
-                                              />
-                                            </GridItem>
-                                            <GridItem
-                                              xs={12}
-                                              sm={5}
-                                              md={5}
                                               className={classes.mrAuto}
                                             >
                                               <form
@@ -778,13 +680,15 @@ class Meetups extends React.Component {
                                               className={classes.modalClose}
                                             />
                                           </Button>
-                                          <h3
-                                            className={`${classes.cardTitle} ${
-                                              classes.modalTitle
-                                            }`}
-                                          >
-                                            Schedule a meetup
-                                          </h3>
+                                          <div className={classes.textCenter}>
+                                            <h3
+                                              className={`${
+                                                classes.cardTitle
+                                              } ${classes.modalTitle}`}
+                                            >
+                                              Schedule a meetup
+                                            </h3>
+                                          </div>
                                         </DialogTitle>
                                         <DialogContent
                                           id="signup-modal-slide-description"
@@ -798,13 +702,6 @@ class Meetups extends React.Component {
                                               className={classes.mlAuto}
                                             >
                                               <br />
-                                              <img
-                                                src={
-                                                  this.state.scheduleImageUrl
-                                                }
-                                                height="auto"
-                                                width="300"
-                                              />
                                             </GridItem>
                                             <GridItem
                                               xs={12}

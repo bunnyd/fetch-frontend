@@ -6,14 +6,8 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import Password from "@material-ui/icons/Lock";
-import People from "@material-ui/icons/People";
-import Warning from "@material-ui/icons/Warning";
-import Check from "@material-ui/icons/Check";
 
 // core components
-import Header from "components/Header/Header.jsx";
-import HeaderLinks from "components/Header/HeaderLinks.jsx";
-import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
@@ -22,10 +16,6 @@ import CardBody from "components/Card/CardBody.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
-//alert
-import SnackbarContent from "components/Snackbar/SnackbarContent.jsx";
-import Clearfix from "components/Clearfix/Clearfix.jsx";
-import notificationsStyles from "assets/jss/material-kit-react/views/componentsSections/notificationsStyles.jsx";
 
 import { connect } from "react-redux";
 import { userActions } from "../../../actions/userActions";
@@ -39,10 +29,8 @@ class Login extends React.Component {
     super(props);
     this.state = {
       cardAnimaton: "cardHidden",
-      loggedIn: false,
       email: "",
-      password: "",
-      submitted: false
+      password: ""
     };
   }
 
@@ -76,9 +64,9 @@ class Login extends React.Component {
     // console.log("login - props", this.props);
     // console.log("login - state", this.state);
 
-    const { loggingIn } = this.props;
-    const { email, password, submitted } = this.state;
-    const { classes, ...rest } = this.props;
+    // const { loggingIn } = this.props;
+    // const { email, password, submitted } = this.state;
+    const { classes } = this.props;
     return (
       <div>
         <div

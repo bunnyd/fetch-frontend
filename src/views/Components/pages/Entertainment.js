@@ -114,6 +114,13 @@ class Entertainment extends React.Component {
                                   )}
                                 </div>
                               )
+                            ) : post.data.media.reddit_video.fallback_url ? (
+                              <iframe
+                                src={post.data.media.reddit_video.fallback_url}
+                                frameBorder="0"
+                                height="400"
+                                width="728"
+                              />
                             ) : null}
                           </div>
                         )}

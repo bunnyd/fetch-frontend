@@ -1,51 +1,21 @@
-// import React, { Component } from "react";
-
-// class Signup extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {};
-//   }
-//   render() {
-//     console.log("what in the world");
-//     return <div>Signup</div>;
-//   }
-// }
-//
-// export default Signup;
-
 import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Timeline from "@material-ui/icons/Timeline";
-import Code from "@material-ui/icons/Code";
-import Group from "@material-ui/icons/Group";
 import Face from "@material-ui/icons/Face";
 import NearMe from "@material-ui/icons/NearMe";
-import Photo from "@material-ui/icons/Photo";
-import AddCircleOutline from "@material-ui/icons/AddCircleOutline";
 import Close from "@material-ui/icons/Close";
 import Email from "@material-ui/icons/Email";
 import Password from "@material-ui/icons/Lock";
 
 import Check from "@material-ui/icons/Check";
-import Favorite from "@material-ui/icons/Favorite";
 // core components
-import Header from "components/Header/Header.jsx";
-import HeaderLinks from "components/Header/HeaderLinks.jsx";
-import Footer from "components/Footer/Footer.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
-import InfoArea from "components/InfoArea/InfoArea.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -59,7 +29,6 @@ import image from "assets/img/signup-bg.jpg";
 import ImageUpload from "components/CustomUpload/ImageUpload.jsx";
 
 import { connect } from "react-redux";
-import { userActions } from "../../../actions/userActions";
 
 function Transition(props) {
   return <Slide direction="down" {...props} />;
@@ -111,10 +80,7 @@ class SignupUser extends React.Component {
   }
 
   render() {
-    console.log("signup - props - ", this.props);
-    console.log("signup - state - ", this.state);
-
-    const { classes, ...rest } = this.props;
+    const { classes } = this.props;
     return (
       <div>
         <div

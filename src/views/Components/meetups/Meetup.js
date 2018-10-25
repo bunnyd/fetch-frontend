@@ -3,58 +3,26 @@ import { connect } from "react-redux";
 
 // nodejs library that concatenates classes
 import classNames from "classnames";
-// react component used to create nice image meadia player
-import ImageGallery from "react-image-gallery";
+
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-// @material-ui/icons
-import ShoppingCart from "@material-ui/icons/ShoppingCart";
-import LocalShipping from "@material-ui/icons/LocalShipping";
-import VerifiedUser from "@material-ui/icons/VerifiedUser";
-import Favorite from "@material-ui/icons/Favorite";
+
 // core components
-import Header from "components/Header/Header.jsx";
-import HeaderLinks from "components/Header/HeaderLinks.jsx";
-import Parallax from "components/Parallax/Parallax.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
-import Footer from "components/Footer/Footer.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-import Accordion from "components/Accordion/Accordion.jsx";
-import InfoArea from "components/InfoArea/InfoArea.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
-import CardFooter from "components/Card/CardFooter.jsx";
-import Tooltip from "@material-ui/core/Tooltip";
-import Muted from "components/Typography/Muted.jsx";
 
 import productStyle from "assets/jss/material-kit-react/views/productStyle.jsx";
-
-// images
-import cardProduct1 from "assets/img/examples/studio-3.jpg";
-import cardProduct3 from "assets/img/examples/studio-3.jpg";
-import cardProduct4 from "assets/img/examples/studio-3.jpg";
-import cardProduct2 from "assets/img/examples/studio-3.jpg";
-import gucci from "assets/img/examples/studio-3.jpg";
-import dolce from "assets/img/examples/studio-3.jpg";
-import tomFord from "assets/img/examples/studio-3.jpg";
-import product4 from "assets/img/examples/studio-3.jpg";
 
 import { getMeetup } from "../../../actions/meetupActions";
 
 class Meetup extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      colorSelect: "0",
-      sizeSelect: "0"
-    };
+    this.state = {};
   }
   handleSelect = event => {
     this.setState({ [event.target.name]: event.target.value });
