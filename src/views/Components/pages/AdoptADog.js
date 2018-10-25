@@ -14,14 +14,15 @@ import { connect } from "react-redux";
 import { fetchPetFinderDogs } from "../../../actions/petFinderActions";
 
 class AdoptADog extends Component {
-  componentDidMount() {
-    this.props.fetchPetFinderDogs("77002");
-  }
-
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  componentDidMount() {
+    this.props.fetchPetFinderDogs("77002");
+  }
+
   render() {
     console.log(this.props);
     const { classes, user, petFinderDogs, ...rest } = this.props;

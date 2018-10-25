@@ -50,9 +50,8 @@ class SignupDog extends React.Component {
       body: data
     }) //end fetch
       .then(resp => resp.json())
-      .then(user => console.log("dog", user))
-      .then(message => {
-        this.sendOwnerData(message);
+      .then(user => {
+        this.sendOwnerData(user);
         return this.props.history.push("/profile");
       })
       .catch(error => console.log(error));
@@ -401,13 +400,13 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setUser: user => userActions.setUser(user)
+    setUser: user => dispatch(userActions.setUser(user))
   };
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { setUser: userActions.setUser }
 )(withStyles(signupPageStyle)(SignupDog));
 
 // WEBPACK FOOTER //

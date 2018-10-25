@@ -1,15 +1,4 @@
 import { GET_PETFINDER_DOGS } from "./types";
-// import axios from "axios";
-
-// export const fetchPetFinderDogs = () => {
-//   return dispatch => {
-//     fetch(
-//       `http://api.petfinder.com/pet.find?format=json&animal=dog&key=cfae35961a8762bd9594e3cff26156d1&location=77377`
-//     )
-//       .then(resp => resp.json())
-//       .then(console.log);
-//   };
-// };
 
 export const fetchPetFinderDogs = zipCode => {
   return dispatch => {
@@ -33,16 +22,3 @@ export const fetchPetFinderDogs = zipCode => {
       });
   };
 };
-// .then(posts => {
-//   dispatch({
-//     type: GET_PETFINDER_DOGS,
-//     payload: posts.data.children
-//   });
-// });
-// export const fetchPetFinderDogs = zip_code => async dispatch => {
-//   const res = await axios.get(`http://api.petfinder.com/pet.find?format=json&animal=dog&key=cfae35961a8762bd9594e3cff26156d1&location=77377${zip_code}`);
-//   dispatch({
-//     type: GET_PETFINDER_DOGS,
-//     payload: res.data
-//   });
-// };
