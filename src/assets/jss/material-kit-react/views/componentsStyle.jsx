@@ -10,7 +10,7 @@ const componentsStyle = {
   main,
   mainRaised,
   parallax: {
-    height: "90vh",
+    height: "100vh",
     overflow: "hidden"
   },
   container: {
@@ -53,7 +53,6 @@ const componentsStyle = {
     ...title,
     color: "#FFFFFF !important",
     position: "relative",
-
     top: "-230px"
   },
   titleLogout: {

@@ -24,3 +24,5 @@ export const DELETE_MEETUP = "DELETE_MEETUPS";
 export const ADD_MEETUP = "ADD_MEETUP";
 export const GET_MEETUP = "GET_MEETUP";
 export const UPDATE_MEETUP = "UPDATE_MEETUP";
+
+export const GET_PETFINDER_DOGS = "GET_PETFINDER_DOGS";
