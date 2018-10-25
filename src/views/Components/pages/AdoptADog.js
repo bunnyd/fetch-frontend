@@ -84,8 +84,12 @@ class AdoptADog extends Component {
                           <br />
                           <b>Size:</b> {dog.size.$t}
                         </h5>
+                        <h4 className={classes.cardTitle}>Interested?</h4>
                         <h4 className={classes.cardTitle}>
-                          Interested? Contact: {dog.contact.email.$t}
+                          Contact: &nbsp;
+                          <a href={`mailto:${dog.contact.email.$t}`}>
+                            {dog.contact.email.$t}
+                          </a>
                         </h4>
                         <h7 className={classes.cardTitle}>
                           {dog.description.$t}
