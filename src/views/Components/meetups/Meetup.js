@@ -127,16 +127,17 @@ class Meetup extends Component {
                           />
                         </CardHeader>
                         <CardBody className={classes.textCenter} plain>
-                          <h4 className={classes.cardTitle}>{dog.name}</h4>
-                          <p className={classes.cardDescription}>
-                            Breed: {dog.breed}
+                          <h2 className={classes.cardTitle}>{dog.name}</h2>
+                          <h4 className={classes.cardTitle}>{dog.short_bio}</h4>
+                          <h6 className={classes.cardDescription}>
+                            <b>Breed:</b> {dog.breed}
                             <br />
-                            Age: {dog.age}
+                            <b>Age:</b> {dog.age}
                             <br />
-                            Sex: {dog.sex}
+                            <b>Sex:</b> {dog.sex}
                             <br />
-                            Size: {dog.size}
-                          </p>
+                            <b>Size:</b> {dog.size}
+                          </h6>
                         </CardBody>
                       </Card>
                     </GridItem>
