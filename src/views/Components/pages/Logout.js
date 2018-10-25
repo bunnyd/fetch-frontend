@@ -28,9 +28,9 @@ class Logout extends React.Component {
           <div className={classes.container}>
             <GridContainer>
               <GridItem>
-                <div className={classes.brand}>
+                <div className={classes.brandLogout}>
                   <h1>See you later!</h1>
-                  <h3 className={classes.title}>
+                  <h3 className={classes.titleLogout}>
                     Please come back to visit us.
                   </h3>
                 </div>

@@ -34,12 +34,32 @@ const componentsStyle = {
       margin: "10px auto 0"
     }
   },
+  brandLogout: {
+    color: "#FFFFFF",
+    textAlign: "center",
+    "& h1": {
+      fontSize: "4.2rem",
+      fontWeight: "600",
+      display: "inline-block",
+      position: "relative"
+    },
+    "& h3": {
+      fontSize: "1.313rem",
+      maxWidth: "500px",
+      margin: "10px auto 0"
+    }
+  },
   title: {
     ...title,
     color: "#FFFFFF !important",
     position: "relative",
 
     top: "-230px"
+  },
+  titleLogout: {
+    ...title,
+    color: "#FFFFFF !important",
+    position: "relative"
   },
   link: {
     textDecoration: "none"
