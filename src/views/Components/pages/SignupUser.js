@@ -48,7 +48,7 @@ class SignupUser extends React.Component {
 
     const data = new FormData(e.target);
 
-    fetch(`http://localhost:3000/owners/`, {
+    fetch(`https://nameless-everglades-31188.herokuapp.com/owners/`, {
       method: "POST",
       credentials: "same-origin",
       headers: {

@@ -4,7 +4,7 @@ export const userService = {
 };
 
 function login(email, password) {
-  return fetch("http://localhost:3000/login", {
+  return fetch("https://nameless-everglades-31188.herokuapp.com/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -46,7 +46,7 @@ function logout() {
 // }
 
 function register(user) {
-  return fetch("http://localhost:3000/owners", {
+  return fetch("https://nameless-everglades-31188.herokuapp.com/owners", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(user)
