@@ -41,9 +41,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "eslint": "^5.8.0",
-    "eslint-plugin-no-unused-expressions": "^0.1.0"
-  }
+  ]
 }
