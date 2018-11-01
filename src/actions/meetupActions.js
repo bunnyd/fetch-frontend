@@ -13,7 +13,7 @@ export const getMeetups = () => async dispatch => {
 
 export const getMeetup = id => async dispatch => {
   const res = await axios.get(
-    `https://nameless-everglades-31188.herokuapp.com/${id}`
+    `https://nameless-everglades-31188.herokuapp.com/meetups/${id}`
   );
   dispatch({
     type: GET_MEETUP,
