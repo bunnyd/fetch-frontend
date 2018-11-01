@@ -27,19 +27,49 @@ class Meetup extends Component {
   handleSelect = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
-
   componentDidMount() {
+    // {this.props.}this.props.history.push("/profile");
+
     // this.props.getMeetup();
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
   }
   render() {
-    const { classes, meetup } = this.props;
+    console.log(this.props);
+    debugger;
+    const { classes, meetup, ...rest } = this.props;
     const imageClasses = classNames(
       classes.imgRaised,
       classes.imgCard,
       classes.imgFluid
     );
+
+    if (!this.props.meetup.id !== undefined) {
+      return (
+        <div className="cd-section" {...rest}>
+          <div className={classes.blog}>
+            <div className={classes.container}>
+              <GridContainer>
+                <GridItem
+                  xs={12}
+                  sm={8}
+                  md={8}
+                  className={`${classes.mlAuto} ${classes.mrAuto}`}
+                >
+                  <h2 className={classes.title}>Loading.....</h2>
+                  <h4>
+                    If this is taking too long, please select the meetup again
+                    in your
+                    <a href="/profile"> profile</a>
+                  </h4>
+                </GridItem>
+              </GridContainer>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div>
         <div className={classes.section}>

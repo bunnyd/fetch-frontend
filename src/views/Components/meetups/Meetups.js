@@ -124,6 +124,7 @@ class Meetups extends React.Component {
             //add user to state
             // this.props.setUser({ type: "SET_USER", payload: user });
             store.dispatch({ type: "SET_USER", payload: user });
+            this.props.history.push("/profile");
           });
       } //end if
     }); //end forEach
@@ -233,117 +234,123 @@ class Meetups extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {!this.props.meetups.length
-                ? null
-                : this.props.meetups.map(row => {
-                    return (
-                      <TableRow className={classes.row} key={row.id}>
-                        <CustomTableCell component="th" scope="row">
-                          {row.id}
-                        </CustomTableCell>
-                        <CustomTableCell numeric>
-                          {row.location_name}
-                        </CustomTableCell>
-                        <CustomTableCell numeric>{row.date}</CustomTableCell>
-                        <CustomTableCell numeric>{row.time}</CustomTableCell>
-                        <CustomTableCell numeric>{row.address}</CustomTableCell>
-                        <CustomTableCell numeric>
-                          {/* BUTTON SMALL MODAL */}
-                          <Button
-                            block
-                            round
-                            onClick={() =>
-                              this.handleClickOpen("smallModal", row)
+              {!this.props.meetups.length ? (
+                <TableRow className={classes.row}>
+                  <CustomTableCell component="th" scope="row">
+                    Loading...
+                  </CustomTableCell>
+                </TableRow>
+              ) : (
+                this.props.meetups.map(row => {
+                  return (
+                    <TableRow className={classes.row} key={row.id}>
+                      <CustomTableCell component="th" scope="row">
+                        {row.id}
+                      </CustomTableCell>
+                      <CustomTableCell numeric>
+                        {row.location_name}
+                      </CustomTableCell>
+                      <CustomTableCell numeric>{row.date}</CustomTableCell>
+                      <CustomTableCell numeric>{row.time}</CustomTableCell>
+                      <CustomTableCell numeric>{row.address}</CustomTableCell>
+                      <CustomTableCell numeric>
+                        {/* BUTTON SMALL MODAL */}
+                        <Button
+                          block
+                          round
+                          onClick={() =>
+                            this.handleClickOpen("smallModal", row)
+                          }
+                        >
+                          <Check /> Join this meetup
+                        </Button>
+                        {/* SMALL MODAL START */}
+                        <Dialog
+                          classes={{
+                            root: classes.modalRoot,
+                            paper: classes.modal + " " + classes.modalSmall
+                          }}
+                          open={this.state.smallModal}
+                          TransitionComponent={Transition}
+                          keepMounted
+                          onClose={() => this.handleClose("noticeModal")}
+                          aria-labelledby="small-modal-slide-title"
+                          aria-describedby="small-modal-slide-description"
+                        >
+                          <DialogTitle
+                            id="small-modal-slide-title"
+                            disableTypography
+                            className={classes.modalHeader}
+                          >
+                            <Button
+                              simple
+                              className={classes.modalCloseButton}
+                              key="close"
+                              aria-label="Close"
+                              onClick={() => this.handleClose("smallModal")}
+                            >
+                              <Close className={classes.modalClose} />
+                            </Button>
+                          </DialogTitle>
+                          <DialogContent
+                            id="small-modal-slide-description"
+                            className={
+                              classes.modalBody + " " + classes.modalSmallBody
                             }
                           >
-                            <Check /> Join this meetup
-                          </Button>
-                          {/* SMALL MODAL START */}
-                          <Dialog
-                            classes={{
-                              root: classes.modalRoot,
-                              paper: classes.modal + " " + classes.modalSmall
-                            }}
-                            open={this.state.smallModal}
-                            TransitionComponent={Transition}
-                            keepMounted
-                            onClose={() => this.handleClose("noticeModal")}
-                            aria-labelledby="small-modal-slide-title"
-                            aria-describedby="small-modal-slide-description"
+                            <h5>
+                              <b>
+                                Please confirm that you want to attend this
+                                meetup:
+                              </b>
+                              <br />
+                              <h6>Location Name:</h6>
+                              <b>{this.state.joinLocationName}</b>
+                              <h6>Date:</h6>
+                              <b>{this.state.joinDate}</b>
+                              <h6>Time:</h6>
+                              <b>{this.state.joinTime}</b>.
+                            </h5>
+                          </DialogContent>
+                          <DialogActions
+                            className={
+                              classes.modalFooter +
+                              " " +
+                              classes.modalFooterCenter
+                            }
                           >
-                            <DialogTitle
-                              id="small-modal-slide-title"
-                              disableTypography
-                              className={classes.modalHeader}
+                            <Button
+                              default
+                              onClick={() => this.handleClose("smallModal")}
+                              link
+                              className={classes.modalSmallFooterFirstButton}
                             >
-                              <Button
-                                simple
-                                className={classes.modalCloseButton}
-                                key="close"
-                                aria-label="Close"
-                                onClick={() => this.handleClose("smallModal")}
-                              >
-                                <Close className={classes.modalClose} />
-                              </Button>
-                            </DialogTitle>
-                            <DialogContent
-                              id="small-modal-slide-description"
+                              Nevermind
+                            </Button>
+                            <Button
+                              onClick={e => {
+                                this.handleClose("smallModal");
+                                this.handleAttendEvent(e);
+                              }}
+                              color="success"
+                              key={row.id}
+                              default
                               className={
-                                classes.modalBody + " " + classes.modalSmallBody
-                              }
-                            >
-                              <h5>
-                                <b>
-                                  Please confirm that you want to attend this
-                                  meetup:
-                                </b>
-                                <br />
-                                <h6>Location Name:</h6>
-                                <b>{this.state.joinLocationName}</b>
-                                <h6>Date:</h6>
-                                <b>{this.state.joinDate}</b>
-                                <h6>Time:</h6>
-                                <b>{this.state.joinTime}</b>.
-                              </h5>
-                            </DialogContent>
-                            <DialogActions
-                              className={
-                                classes.modalFooter +
+                                classes.modalSmallFooterFirstButton +
                                 " " +
-                                classes.modalFooterCenter
+                                classes.modalSmallFooterSecondButton
                               }
                             >
-                              <Button
-                                default
-                                onClick={() => this.handleClose("smallModal")}
-                                link
-                                className={classes.modalSmallFooterFirstButton}
-                              >
-                                Nevermind
-                              </Button>
-                              <Button
-                                onClick={e => {
-                                  this.handleClose("smallModal");
-                                  this.handleAttendEvent(e);
-                                }}
-                                color="success"
-                                key={row.id}
-                                default
-                                className={
-                                  classes.modalSmallFooterFirstButton +
-                                  " " +
-                                  classes.modalSmallFooterSecondButton
-                                }
-                              >
-                                I'll be there!
-                              </Button>
-                            </DialogActions>
-                          </Dialog>
-                          {/* SMALL MODAL END */}
-                        </CustomTableCell>
-                      </TableRow>
-                    );
-                  })}
+                              I'll be there!
+                            </Button>
+                          </DialogActions>
+                        </Dialog>
+                        {/* SMALL MODAL END */}
+                      </CustomTableCell>
+                    </TableRow>
+                  );
+                })
+              )}
             </TableBody>
           </Table>
         </Paper>
@@ -384,7 +391,14 @@ class Meetups extends React.Component {
                               </TableRow>
                             </TableHead>
                             <TableBody>
-                              {this.props.dogRestaurants &&
+                              {!yelpDogRestaurantsLoaded ? (
+                                <TableRow className={classes.dogPark}>
+                                  <CustomTableCell numeric>
+                                    Loading...
+                                  </CustomTableCell>
+                                </TableRow>
+                              ) : (
+                                this.props.dogRestaurants &&
                                 this.props.dogRestaurants.map(dogRestaurant => {
                                   return (
                                     <TableRow
@@ -436,179 +450,146 @@ class Meetups extends React.Component {
                                         >
                                           <Schedule /> Schedule
                                         </Button>
-                                        {/* MEETUP MODAL START */}
-                                        <Dialog
-                                          classes={{
-                                            root: classes.modalRoot,
-                                            paper:
-                                              classes.modal +
-                                              " " +
-                                              classes.modalSignup
-                                          }}
-                                          open={this.state.signupModal}
-                                          TransitionComponent={Transition}
-                                          keepMounted
-                                          onClose={() =>
-                                            this.handleClose("signupModal")
-                                          }
-                                          aria-labelledby="signup-modal-slide-title"
-                                          aria-describedby="signup-modal-slide-description"
-                                        >
-                                          <Card
-                                            plain
-                                            className={classes.modalSignupCard}
-                                          >
-                                            <DialogTitle
-                                              id="signup-modal-slide-title"
-                                              disableTypography
-                                              className={classes.modalHeader}
-                                            >
-                                              <Button
-                                                simple
-                                                className={
-                                                  classes.modalCloseButton
-                                                }
-                                                key="close"
-                                                aria-label="Close"
-                                                onClick={() =>
-                                                  this.handleClose(
-                                                    "signupModal"
-                                                  )
-                                                }
-                                              >
-                                                <Close
-                                                  className={classes.modalClose}
-                                                />
-                                              </Button>
-                                              <h3
-                                                className={`${
-                                                  classes.cardTitle
-                                                } ${classes.modalTitle}`}
-                                              >
-                                                Schedule a meetup
-                                              </h3>
-                                            </DialogTitle>
-                                            <DialogContent
-                                              id="signup-modal-slide-description"
-                                              className={classes.modalBody}
-                                            >
-                                              <GridContainer>
-                                                <GridItem
-                                                  xs={12}
-                                                  sm={5}
-                                                  md={5}
-                                                  className={classes.mlAuto}
-                                                >
-                                                  <br />
-                                                  <img
-                                                    src={
-                                                      this.state
-                                                        .scheduleImageUrl
-                                                    }
-                                                    height="auto"
-                                                    width="300"
-                                                  />
-                                                </GridItem>
-                                                <GridItem
-                                                  xs={12}
-                                                  sm={5}
-                                                  md={5}
-                                                  className={classes.mrAuto}
-                                                >
-                                                  <form
-                                                    ref="inputForm"
-                                                    onSubmit={e =>
-                                                      this.handleCreateMeetup(e)
-                                                    }
-                                                  >
-                                                    <CustomInput
-                                                      type="text"
-                                                      labelText="Location"
-                                                      id="float"
-                                                      formControlProps={{
-                                                        fullWidth: true
-                                                      }}
-                                                      inputProps={{
-                                                        value: `${
-                                                          this.state
-                                                            .scheduleLocationName
-                                                        }`
-                                                      }}
-                                                    />
-                                                    <CustomInput
-                                                      type="text"
-                                                      labelText="Address"
-                                                      id="float"
-                                                      formControlProps={{
-                                                        fullWidth: true
-                                                      }}
-                                                      inputProps={{
-                                                        value: `${
-                                                          this.state
-                                                            .scheduleAddress
-                                                        }`
-                                                      }}
-                                                    />
-                                                    <CustomInput
-                                                      type="text"
-                                                      labelText="Zip Code"
-                                                      id="float"
-                                                      formControlProps={{
-                                                        fullWidth: true
-                                                      }}
-                                                      inputProps={{
-                                                        value: `${
-                                                          this.state
-                                                            .scheduleZipCode
-                                                        }`
-                                                      }}
-                                                    />
-                                                    <Datetime
-                                                      name="scheduleDate"
-                                                      format="YYYYMMDD"
-                                                      timeFormat={false}
-                                                      inputProps={{
-                                                        placeholder:
-                                                          "Select Date"
-                                                      }}
-                                                    />
-                                                    <Datetime
-                                                      name="scheduleTime"
-                                                      dateFormat={false}
-                                                      inputProps={{
-                                                        placeholder:
-                                                          "Select Time"
-                                                      }}
-                                                    />
-                                                    <div
-                                                      className={
-                                                        classes.textCenter
-                                                      }
-                                                    >
-                                                      <Button
-                                                        type="submit"
-                                                        label="submit"
-                                                        color="primary"
-                                                        round
-                                                      >
-                                                        Schedule Meetup
-                                                      </Button>
-                                                    </div>
-                                                  </form>
-                                                </GridItem>
-                                              </GridContainer>
-                                            </DialogContent>
-                                          </Card>
-                                        </Dialog>
-                                        {/* MEETUP MODAL END */}
                                       </CustomTableCell>
                                     </TableRow>
                                   );
-                                })}
+                                })
+                              )}
                             </TableBody>
                           </Table>
                         </Paper>
                       </span>
+                      {/* MEETUP MODAL START */}
+                      <Dialog
+                        classes={{
+                          root: classes.modalRoot,
+                          paper: classes.modal + " " + classes.modalSignup
+                        }}
+                        open={this.state.signupModal}
+                        TransitionComponent={Transition}
+                        keepMounted
+                        onClose={() => this.handleClose("signupModal")}
+                        aria-labelledby="signup-modal-slide-title"
+                        aria-describedby="signup-modal-slide-description"
+                      >
+                        <Card plain className={classes.modalSignupCard}>
+                          <DialogTitle
+                            id="signup-modal-slide-title"
+                            disableTypography
+                            className={classes.modalHeader}
+                          >
+                            <Button
+                              simple
+                              className={classes.modalCloseButton}
+                              key="close"
+                              aria-label="Close"
+                              onClick={() => this.handleClose("signupModal")}
+                            >
+                              <Close className={classes.modalClose} />
+                            </Button>
+                            <h3
+                              className={`${classes.cardTitle} ${
+                                classes.modalTitle
+                              }`}
+                            >
+                              Schedule a meetup
+                            </h3>
+                          </DialogTitle>
+                          <DialogContent
+                            id="signup-modal-slide-description"
+                            className={classes.modalBody}
+                          >
+                            <GridContainer>
+                              <GridItem
+                                xs={12}
+                                sm={5}
+                                md={5}
+                                className={classes.mlAuto}
+                              >
+                                <br />
+                                <img
+                                  src={this.state.scheduleImageUrl}
+                                  height="auto"
+                                  width="300"
+                                />
+                              </GridItem>
+                              <GridItem
+                                xs={12}
+                                sm={5}
+                                md={5}
+                                className={classes.mrAuto}
+                              >
+                                <form
+                                  ref="inputForm"
+                                  onSubmit={e => this.handleCreateMeetup(e)}
+                                >
+                                  <CustomInput
+                                    type="text"
+                                    labelText="Location"
+                                    id="float"
+                                    formControlProps={{
+                                      fullWidth: true
+                                    }}
+                                    inputProps={{
+                                      value: `${
+                                        this.state.scheduleLocationName
+                                      }`
+                                    }}
+                                  />
+                                  <CustomInput
+                                    type="text"
+                                    labelText="Address"
+                                    id="float"
+                                    formControlProps={{
+                                      fullWidth: true
+                                    }}
+                                    inputProps={{
+                                      value: `${this.state.scheduleAddress}`
+                                    }}
+                                  />
+                                  <CustomInput
+                                    type="text"
+                                    labelText="Zip Code"
+                                    id="float"
+                                    formControlProps={{
+                                      fullWidth: true
+                                    }}
+                                    inputProps={{
+                                      value: `${this.state.scheduleZipCode}`
+                                    }}
+                                  />
+                                  <Datetime
+                                    name="scheduleDate"
+                                    format="YYYYMMDD"
+                                    timeFormat={false}
+                                    inputProps={{
+                                      placeholder: "Select Date"
+                                    }}
+                                  />
+                                  <Datetime
+                                    name="scheduleTime"
+                                    dateFormat={false}
+                                    inputProps={{
+                                      placeholder: "Select Time"
+                                    }}
+                                  />
+                                  <div className={classes.textCenter}>
+                                    <Button
+                                      type="submit"
+                                      label="submit"
+                                      color="primary"
+                                      round
+                                    >
+                                      Schedule Meetup
+                                    </Button>
+                                  </div>
+                                </form>
+                              </GridItem>
+                            </GridContainer>
+                          </DialogContent>
+                        </Card>
+                      </Dialog>
+                      {/* MEETUP MODAL END */}
                     </div>
                   )
                 },
@@ -639,7 +620,14 @@ class Meetups extends React.Component {
                               </TableRow>
                             </TableHead>
                             <TableBody>
-                              {this.props.dogParks &&
+                              {!yelpDogParksLoaded ? (
+                                <TableRow className={classes.dogPark}>
+                                  <CustomTableCell numeric>
+                                    Loading...
+                                  </CustomTableCell>
+                                </TableRow>
+                              ) : (
+                                this.props.dogParks &&
                                 this.props.dogParks.map(dogPark => {
                                   return (
                                     <TableRow
@@ -689,183 +677,148 @@ class Meetups extends React.Component {
                                         >
                                           <Schedule /> Schedule
                                         </Button>
-                                        {/* MEETUP MODAL START */}
-                                        <Dialog
-                                          classes={{
-                                            root: classes.modalRoot,
-                                            paper:
-                                              classes.modal +
-                                              " " +
-                                              classes.modalSignup
-                                          }}
-                                          open={this.state.signupModal}
-                                          TransitionComponent={Transition}
-                                          keepMounted
-                                          onClose={() =>
-                                            this.handleClose("signupModal")
-                                          }
-                                          aria-labelledby="signup-modal-slide-title"
-                                          aria-describedby="signup-modal-slide-description"
-                                        >
-                                          <Card
-                                            plain
-                                            className={classes.modalSignupCard}
-                                          >
-                                            <DialogTitle
-                                              id="signup-modal-slide-title"
-                                              disableTypography
-                                              className={classes.modalHeader}
-                                            >
-                                              <Button
-                                                simple
-                                                className={
-                                                  classes.modalCloseButton
-                                                }
-                                                key="close"
-                                                aria-label="Close"
-                                                onClick={() =>
-                                                  this.handleClose(
-                                                    "signupModal"
-                                                  )
-                                                }
-                                              >
-                                                <Close
-                                                  className={classes.modalClose}
-                                                />
-                                              </Button>
-                                              <div
-                                                className={classes.textCenter}
-                                              >
-                                                <h3
-                                                  className={`${
-                                                    classes.cardTitle
-                                                  } ${classes.modalTitle}`}
-                                                >
-                                                  Schedule a meetup
-                                                </h3>
-                                              </div>
-                                            </DialogTitle>
-                                            <DialogContent
-                                              id="signup-modal-slide-description"
-                                              className={classes.modalBody}
-                                            >
-                                              <GridContainer>
-                                                <GridItem
-                                                  xs={12}
-                                                  sm={5}
-                                                  md={5}
-                                                  className={classes.mlAuto}
-                                                >
-                                                  <br />
-                                                  <img
-                                                    src={
-                                                      this.state
-                                                        .scheduleImageUrl
-                                                    }
-                                                    height="auto"
-                                                    width="300"
-                                                  />
-                                                </GridItem>
-                                                <GridItem
-                                                  xs={12}
-                                                  sm={5}
-                                                  md={5}
-                                                  className={classes.mrAuto}
-                                                >
-                                                  <form
-                                                    ref="inputForm"
-                                                    onSubmit={e =>
-                                                      this.handleCreateMeetup(e)
-                                                    }
-                                                  >
-                                                    <CustomInput
-                                                      type="text"
-                                                      labelText="Location"
-                                                      id="float"
-                                                      formControlProps={{
-                                                        fullWidth: true
-                                                      }}
-                                                      inputProps={{
-                                                        value: `${
-                                                          this.state
-                                                            .scheduleLocationName
-                                                        }`
-                                                      }}
-                                                    />
-                                                    <CustomInput
-                                                      type="text"
-                                                      labelText="Address"
-                                                      id="float"
-                                                      formControlProps={{
-                                                        fullWidth: true
-                                                      }}
-                                                      inputProps={{
-                                                        value: `${
-                                                          this.state
-                                                            .scheduleAddress
-                                                        }`
-                                                      }}
-                                                    />
-                                                    <CustomInput
-                                                      type="text"
-                                                      labelText="Zip Code"
-                                                      id="float"
-                                                      formControlProps={{
-                                                        fullWidth: true
-                                                      }}
-                                                      inputProps={{
-                                                        value: `${
-                                                          this.state
-                                                            .scheduleZipCode
-                                                        }`
-                                                      }}
-                                                    />
-                                                    <Datetime
-                                                      name="scheduleDate"
-                                                      format="YYYYMMDD"
-                                                      timeFormat={false}
-                                                      inputProps={{
-                                                        placeholder:
-                                                          "Select Date"
-                                                      }}
-                                                    />
-                                                    <Datetime
-                                                      name="scheduleTime"
-                                                      dateFormat={false}
-                                                      inputProps={{
-                                                        placeholder:
-                                                          "Select Time"
-                                                      }}
-                                                    />
-                                                    <div
-                                                      className={
-                                                        classes.textCenter
-                                                      }
-                                                    >
-                                                      <Button
-                                                        type="submit"
-                                                        label="submit"
-                                                        color="primary"
-                                                        round
-                                                      >
-                                                        Schedule Meetup
-                                                      </Button>
-                                                    </div>
-                                                  </form>
-                                                </GridItem>
-                                              </GridContainer>
-                                            </DialogContent>
-                                          </Card>
-                                        </Dialog>
-                                        {/* MEETUP MODAL END */}
                                       </CustomTableCell>
                                     </TableRow>
                                   );
-                                })}
+                                })
+                              )}
                             </TableBody>
                           </Table>
                         </Paper>
                       </span>
+                      {/* MEETUP MODAL START */}
+                      <Dialog
+                        classes={{
+                          root: classes.modalRoot,
+                          paper: classes.modal + " " + classes.modalSignup
+                        }}
+                        open={this.state.signupModal}
+                        TransitionComponent={Transition}
+                        keepMounted
+                        onClose={() => this.handleClose("signupModal")}
+                        aria-labelledby="signup-modal-slide-title"
+                        aria-describedby="signup-modal-slide-description"
+                      >
+                        <Card plain className={classes.modalSignupCard}>
+                          <DialogTitle
+                            id="signup-modal-slide-title"
+                            disableTypography
+                            className={classes.modalHeader}
+                          >
+                            <Button
+                              simple
+                              className={classes.modalCloseButton}
+                              key="close"
+                              aria-label="Close"
+                              onClick={() => this.handleClose("signupModal")}
+                            >
+                              <Close className={classes.modalClose} />
+                            </Button>
+                            <div className={classes.textCenter}>
+                              <h3
+                                className={`${classes.cardTitle} ${
+                                  classes.modalTitle
+                                }`}
+                              >
+                                Schedule a meetup
+                              </h3>
+                            </div>
+                          </DialogTitle>
+                          <DialogContent
+                            id="signup-modal-slide-description"
+                            className={classes.modalBody}
+                          >
+                            <GridContainer>
+                              <GridItem
+                                xs={12}
+                                sm={5}
+                                md={5}
+                                className={classes.mlAuto}
+                              >
+                                <br />
+                                <img
+                                  src={this.state.scheduleImageUrl}
+                                  height="auto"
+                                  width="300"
+                                />
+                              </GridItem>
+                              <GridItem
+                                xs={12}
+                                sm={5}
+                                md={5}
+                                className={classes.mrAuto}
+                              >
+                                <form
+                                  ref="inputForm"
+                                  onSubmit={e => this.handleCreateMeetup(e)}
+                                >
+                                  <CustomInput
+                                    type="text"
+                                    labelText="Location"
+                                    id="float"
+                                    formControlProps={{
+                                      fullWidth: true
+                                    }}
+                                    inputProps={{
+                                      value: `${
+                                        this.state.scheduleLocationName
+                                      }`
+                                    }}
+                                  />
+                                  <CustomInput
+                                    type="text"
+                                    labelText="Address"
+                                    id="float"
+                                    formControlProps={{
+                                      fullWidth: true
+                                    }}
+                                    inputProps={{
+                                      value: `${this.state.scheduleAddress}`
+                                    }}
+                                  />
+                                  <CustomInput
+                                    type="text"
+                                    labelText="Zip Code"
+                                    id="float"
+                                    formControlProps={{
+                                      fullWidth: true
+                                    }}
+                                    inputProps={{
+                                      value: `${this.state.scheduleZipCode}`
+                                    }}
+                                  />
+                                  <Datetime
+                                    name="scheduleDate"
+                                    format="YYYYMMDD"
+                                    timeFormat={false}
+                                    inputProps={{
+                                      placeholder: "Select Date"
+                                    }}
+                                  />
+                                  <Datetime
+                                    name="scheduleTime"
+                                    dateFormat={false}
+                                    inputProps={{
+                                      placeholder: "Select Time"
+                                    }}
+                                  />
+                                  <div className={classes.textCenter}>
+                                    <Button
+                                      type="submit"
+                                      label="submit"
+                                      color="primary"
+                                      round
+                                    >
+                                      Schedule Meetup
+                                    </Button>
+                                  </div>
+                                </form>
+                              </GridItem>
+                            </GridContainer>
+                          </DialogContent>
+                        </Card>
+                      </Dialog>
+                      {/* MEETUP MODAL END */}
                     </div>
                   )
                 }
