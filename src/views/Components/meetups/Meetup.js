@@ -40,7 +40,6 @@ class Meetup extends Component {
       classes.imgCard,
       classes.imgFluid
     );
-    console.log(this.props);
     return (
       <div>
         <div className={classes.section}>

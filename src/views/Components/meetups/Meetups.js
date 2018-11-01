@@ -192,14 +192,6 @@ class Meetups extends React.Component {
   };
 
   render() {
-    // // debugger;
-
-    console.log("meetup page - props", this.props);
-    //
-    // console.log("meetup", this.state);
-    //
-    // console.log("meetup page - zip", this.props.user.zip_code);
-
     const { classes } = this.props;
     const { yelpDogParksLoaded, yelpDogRestaurantsLoaded } = this.props;
 

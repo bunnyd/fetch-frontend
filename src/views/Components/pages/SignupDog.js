@@ -82,9 +82,6 @@ class SignupDog extends React.Component {
   };
 
   render() {
-    console.log("signup - props - ", this.props);
-    console.log("signup - state - ", this.state);
-
     const { classes } = this.props;
     return (
       <div>
