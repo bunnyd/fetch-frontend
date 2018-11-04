@@ -47,7 +47,7 @@ class SignupUser extends React.Component {
     e.preventDefault();
 
     const data = new FormData(e.target);
-    debugger;
+    console.log(data);
 
     fetch(`https://nameless-everglades-31188.herokuapp.com/owners/`, {
       method: "POST",
