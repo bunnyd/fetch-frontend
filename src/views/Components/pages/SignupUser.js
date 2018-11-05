@@ -56,7 +56,9 @@ class SignupUser extends React.Component {
       },
       body: data
     })
+      .then(r => console.log("1", r))
       .then(resp => resp.json())
+      .then(r => console.log("2", r))
       .then(
         user =>
           user.errors ? console.log(user) : this.setState({ userId: user.id })
