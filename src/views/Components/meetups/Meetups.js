@@ -98,27 +98,26 @@ class Meetups extends React.Component {
     this.props.meetups.forEach(meetup => {
       if (this.state.joinLocationName === meetup.location_name) {
         // debugger;
-        fetch(
-          `https://nameless-everglades-31188.herokuapp.com/owners/${
-            this.props.user.id
-          }`,
-          {
-            method: "PATCH",
-            credentials: "same-origin",
-            headers: {
-              Authorization: `${localStorage.getItem("jwt")}`,
-              "Content-Type": "application/json",
-              Accept: "application/json"
-            },
-            body: JSON.stringify({
-              meetup_ids: [
-                {
-                  id: `${this.state.joinId}`
-                }
-              ]
-            })
-          }
-        ) //end fetch
+        // fetch(
+        //   `https://nameless-everglades-31188.herokuapp.com/owners/${
+        //     this.props.user.id
+        //   }`,
+        fetch(`http://localhost:3000/owners/${this.props.user.id}`, {
+          method: "PATCH",
+          credentials: "same-origin",
+          headers: {
+            Authorization: `${localStorage.getItem("jwt")}`,
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            meetup_ids: [
+              {
+                id: `${this.state.joinId}`
+              }
+            ]
+          })
+        }) //end fetch
           .then(res => res.json())
           .then(user => {
             //add user to state
@@ -137,7 +136,9 @@ class Meetups extends React.Component {
 
     const scheduleTime = e.target[4].value;
     debugger;
-    fetch(`https://nameless-everglades-31188.herokuapp.com/meetups/`, {
+    // fetch(`https://nameless-everglades-31188.herokuapp.com/meetups/`, {
+
+    fetch(`http://localhost:3000/meetups/`, {
       method: "POST",
       credentials: "same-origin",
       headers: {

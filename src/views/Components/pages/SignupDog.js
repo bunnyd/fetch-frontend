@@ -39,8 +39,9 @@ class SignupDog extends React.Component {
     e.preventDefault();
 
     const data = new FormData(e.target);
+    // fetch(`https://nameless-everglades-31188.herokuapp.com/dogs/`, {
 
-    fetch(`https://nameless-everglades-31188.herokuapp.com/dogs/`, {
+    fetch(`http://localhost:3000/dogs/`, {
       method: "POST",
       credentials: "same-origin",
       headers: {

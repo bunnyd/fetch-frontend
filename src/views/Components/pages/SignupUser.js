@@ -47,18 +47,15 @@ class SignupUser extends React.Component {
     e.preventDefault();
 
     const data = new FormData(e.target);
+    // fetch(`https://nameless-everglades-31188.herokuapp.com/owners/`, {
 
-    fetch(`https://nameless-everglades-31188.herokuapp.com/owners/`, {
+    fetch(`http://localhost:3000/owners/`, {
       method: "POST",
       credentials: "same-origin",
-      headers: {
-        // Accept: "application/json"
-      },
+      headers: {},
       body: data
     })
-      .then(r => console.log("1", r))
       .then(resp => resp.json())
-      .then(r => console.log("2", r))
       .then(
         user =>
           user.errors ? console.log(user) : this.setState({ userId: user.id })

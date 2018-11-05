@@ -66,7 +66,8 @@ class Entertainment extends React.Component {
                     <CardHeader image plain>
                       <a href={`https://www.reddit.com/${post.data.permalink}`}>
                         {post.data.media === null &&
-                        !post.data.crosspost_parent_list ? (
+                        !post.data.crosspost_parent_list &&
+                        !post.data.preview.reddit_video_preview ? (
                           <Card className={classes.card4}>
                             <img src={post.data.url} alt="..." />
                           </Card>

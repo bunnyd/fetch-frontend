@@ -17,7 +17,9 @@ import "./App.css";
 class App extends Component {
   componentDidMount() {
     if (localStorage.jwt !== undefined) {
-      fetch("https://nameless-everglades-31188.herokuapp.com/authenticate", {
+      // fetch("https://nameless-everglades-31188.herokuapp.com/authenticate", {
+
+      fetch("http://localhost:3000/authenticate", {
         method: "POST",
         credentials: "same-origin",
         headers: {
